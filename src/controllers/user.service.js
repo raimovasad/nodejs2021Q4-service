@@ -2,13 +2,14 @@ const User = require('../models/user.model');
 
 function getAllUsers(req,res){
     const users = User.getAll()
-    res.send(users)
+
+    res.send(users.map(user => User.toResponse(user)))
 };
 
 function getUsersById(req,res){
     const {id} = req.params;
-    const users = User.getById(id);
-    res.send(users);
+    const user = User.getById(id);
+    res.send(User.toResponse(user));
 };
 
 function updateUser(req,res){
@@ -40,10 +41,20 @@ function addUser(req,res) {
     }
  }
 
+ function removeUser(req,res) { 
+    const {id} = req.params;
+    try{
+        const updatedUsers = User.remove(id)
+        res.send(updatedUsers)
+    }catch(err){
+        res.send(`${err}`)
+    }
+  }
 
 module.exports = {
     getAllUsers,
     getUsersById,
     addUser,
-    updateUser
+    updateUser,
+    removeUser
 }

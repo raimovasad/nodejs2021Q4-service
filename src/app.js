@@ -20,6 +20,7 @@ const fastify = require('fastify')({logger: true})
 // app.use('/users', userRouter);
 
 fastify.register(require('./routers/user.router'))
+fastify.register(require('./routers/boards.router'))
 
 fastify.get('/',(req,res)=>{
   res.send('Server has been successfully launched!')
