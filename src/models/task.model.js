@@ -107,7 +107,7 @@ class Task {
   static removeUserId(userId){
       tasks.forEach(task => {
         if(task.userId === userId){
-          task.userId = null
+          Object.assign(task,{userId : null})
         }
       })
   }
