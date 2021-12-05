@@ -55,9 +55,27 @@ To run only specific test suite with authorization (users, boards or tasks)
 npm run test:auth <suite name>
 ```
 
-## Development
+## Endpoints 
+ 1. `User` (`/users` route)
+      * `GET /users` - get all users 
+      * `GET /users/:userId` - get the user by id 
+      * `POST /users` - create user
+      * `PUT /users/:userId` - update user
+      * `DELETE /users/:userId` - delete user
+2. `Board` (`/boards` route)
+      * `GET /boards` - get all boards
+      * `GET /boards/:boardId` - get the board by id
+      * `POST /boards` - create board
+      * `PUT /boards/:boardId` - update board
+      * `DELETE /boards/:boardId` - delete board
+ 3. `Task` (`boards/:boardId/tasks` route)
+      * `GET boards/:boardId/tasks` - get all tasks
+      * `GET boards/:boardId/tasks/:taskId` - get the task by id
+      * `POST boards/:boardId/tasks` - create task
+      * `PUT boards/:boardId/tasks/:taskId` - update task
+      * `DELETE boards/:boardId/tasks/:taskId` - delete task
 
-If you're using VSCode, you can get a better developer experience from integration with [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) and [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) extensions.
+
 
 ### Auto-fix and format
 
@@ -69,4 +87,3 @@ npm run lint
 
 Press <kbd>F5</kbd> to debug.
 
-For more information, visit: https://code.visualstudio.com/docs/editor/debugging
