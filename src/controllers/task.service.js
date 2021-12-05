@@ -17,10 +17,10 @@ function getAllTasks(req,res){
 };
 
 function getTaskById(req,res){
-    const {id,boardId} = req.params;
-    const validId = uuid.validate(boardId);
-    const validTaskId = uuid.validate(id);
-    if(validId && validTaskId){
+    const {id} = req.params;
+    // const validId = uuid.validate(boardId);
+    // const validTaskId = uuid.validate(id);
+    // if(validId && validTaskId){
         try{
             const task = Task.getById(id);
             if(task){
@@ -35,16 +35,16 @@ function getTaskById(req,res){
             res.statusCode = 404;
             res.send(`${error.message}`)
         }
-    }
-    else{
-        res.statusCode = 400;
-        if(!validId){
-         res.send({message:'Your boardId is not valid!'})
-        }
-        else{
-            res.send({message:'Your task id is not valid!'})
-        }
-    }
+    // }
+    // else{
+    //     res.statusCode = 400;
+    //     if(!validId){
+    //      res.send({message:'Your boardId is not valid!'})
+    //     }
+    //     else{
+    //         res.send({message:'Your task id is not valid!'})
+    //     }
+    // }
     
 
 };
@@ -55,24 +55,21 @@ function updateTask(req,res){
     // const validTaskId = uuid.validate(id);
     // if(validId && validTaskId){
         const {title,order,description,userId,columnId,boardId} = req.body;
-        if(!title && !order && !description){
-            res.statusCode = 400;
-            res.send({message: 'Missed required field!'})
-        }
-    const task = {
-        title,
-        order,
-        description,
-        userId,
-        boardId,
-        columnId,
-    };
-        try{
+        
+        const task = {
+            title,
+            order,
+            description,
+            userId,
+            boardId,
+            columnId,
+         };
+         try{
             const updated = Task.update(boardId,id,task)
             res.send(updated);
-        }catch(error){
+         }catch(error){
             res.send(`${error.message}`)
-        }
+         }
     // }
     // else{
     //     res.statusCode = 400;
@@ -87,17 +84,15 @@ function updateTask(req,res){
 };
 
 function addTask(req,res) { 
-        const {title,order,description,userId,boardId,columnId} = req.body
-        if(!title || !order || !description){
-            res.send({message:'Missed required field!'});
-        }
-        else{
+        const boardIdReq = req.params.boardId
+        const {title,order,description,userId,columnId} = req.body
+        
             const task = new Task({
                 title,
                 order,
                 description,
                 userId,
-                boardId,
+                boardId: boardIdReq,
                 columnId,
             })
             try{
@@ -108,7 +103,6 @@ function addTask(req,res) {
             catch(err){
                 res.send({message: `${err.message}`})
             } 
-        }
    
  }
 
