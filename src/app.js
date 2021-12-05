@@ -9,18 +9,11 @@ const fastify = require('fastify')({logger: true})
 
 // app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
-// app.use('/', (req, res, next) => {
-//   if (req.originalUrl === '/') {
-//     res.send('Service is running!');
-//     return;
-//   }
-//   next();
-// });
 
-// app.use('/users', userRouter);
 
 fastify.register(require('./routers/user.router'))
 fastify.register(require('./routers/boards.router'))
+fastify.register(require('./routers/task.router'))
 
 fastify.get('/',(req,res)=>{
   res.send('Server has been successfully launched!')

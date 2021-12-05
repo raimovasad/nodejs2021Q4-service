@@ -1,5 +1,6 @@
 const {v4:uuid} = require('uuid');
-const {boards} = require('../data/fakedatabase')
+const {boards,tasks} = require('../data/fakedatabase')
+const Task = require('./task.model')
 
 class Board {
   constructor({
@@ -37,7 +38,7 @@ class Board {
       throw new Error('Internal server error!')
     }
     boards.push(this.toSaveBoard())
-    return this.toSaveBoard();
+    return boards[boards.length-1];
   } 
 
   static update(id,board){
@@ -49,10 +50,12 @@ class Board {
     if(index === -1){
       throw new Error(`User with id ${id} doesn't exist!`)
     }
-    boards[index] = {
-      id,
-      ...board
-    }
+    const newBoard = {};
+    newBoard.id =  id;
+    newBoard.title = board.title;
+    newBoard.columns = board.columns.map(col=> ({id:col.id,title:col.title,order:col.order}));
+
+    boards[index] = newBoard;
     return boards[index];
   }
  
@@ -81,6 +84,7 @@ class Board {
     }
     else{
         boards.splice(index,1)
+        Task.removeByBoard(id)
     }
     return boards;
 

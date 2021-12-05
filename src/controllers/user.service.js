@@ -32,22 +32,25 @@ function addUser(req,res) {
     else{
         const user = new User({name,login,password})
         try{
-            user.save()
+            const newUser = user.save()
+            res.statusCode =201;
+            res.send(User.toResponse(newUser))
         }
         catch(err){
             res.send({message: `${err.message}`})
         }
-        res.send(user)
     }
  }
 
  function removeUser(req,res) { 
     const {id} = req.params;
     try{
-        const updatedUsers = User.remove(id)
-        res.send(updatedUsers)
+        User.remove(id);
+        res.statusCode = 204;
+        res.send();
     }catch(err){
-        res.send(`${err}`)
+        res.statusCode = 404
+        res.send(`${err}`);
     }
   }
 

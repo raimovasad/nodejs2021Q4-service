@@ -7,8 +7,15 @@ function getAllBoards(req,res){
 
 function getBoardById(req,res){
     const {id} = req.params;
-    const user = Board.getById(id);
-    res.send(user);
+    try{
+        const user = Board.getById(id);
+        res.send(user);
+
+    }catch(error){
+        res.statusCode = 404
+        res.send(`${error.message}`)
+    }
+
 };
 
 function updateBoard(req,res){
@@ -18,6 +25,8 @@ function updateBoard(req,res){
         title,
         columns,
     }
+
+    req.log.info(columns[0])
     const updated = Board.update(id,board)
     res.send(updated);
 };
@@ -31,6 +40,7 @@ function addBoard(req,res) {
         const board = new Board({title,columns})
         try{
            const newBoard = board.save()
+           res.statusCode = 201
            res.send(newBoard)
         }
         catch(err){
@@ -42,8 +52,9 @@ function addBoard(req,res) {
  function removeBoard(req,res) { 
     const {id} = req.params;
     try{
-        const updatedBoards = Board.remove(id)
-        res.send(updatedBoards)
+         Board.remove(id)
+        res.statusCode =204
+        res.send()
     }catch(err){
         res.send(`${err}`)
     }
