@@ -1,4 +1,4 @@
-const fastify = require('fastify')({logger: true})
+const fastify = require('fastify')({})
 // const swaggerUI = require('swagger-ui-express');
 // const path = require('path');
 // const YAML = require('yamljs');

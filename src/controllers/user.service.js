@@ -1,4 +1,6 @@
 const User = require('../models/user.model');
+const Task = require('../models/task.model')
+
 
 function getAllUsers(req,res){
     const users = User.getAll()
@@ -46,6 +48,7 @@ function addUser(req,res) {
     const {id} = req.params;
     try{
         User.remove(id);
+        Task.removeUserId(id);
         res.statusCode = 204;
         res.send();
     }catch(err){

@@ -1,6 +1,5 @@
 const {v4:uuid} = require('uuid');
-const {boards,tasks} = require('../data/fakedatabase')
-const Task = require('./task.model')
+const {boards} = require('../data/fakedatabase')
 
 class Board {
   constructor({
@@ -48,7 +47,7 @@ class Board {
     }
     const index = boards.findIndex( c=> c.id.toString() === id.toString())
     if(index === -1){
-      throw new Error(`User with id ${id} doesn't exist!`)
+      throw new Error(`Board with id ${id} doesn't exist!`)
     }
     const newBoard = {};
     newBoard.id =  id;
@@ -70,23 +69,19 @@ class Board {
   static getById(id){
     const boardsDB = boards
     const board = boardsDB.find(c => c.id.toString() === id.toString())
-    if(!board){
-      throw new Error(`User with id ${id} doesn't exist!`)
-    }else{
-      return board;
-    }
+    return board;
   }
 
   static remove(id){
     const index = boards.findIndex( c=> c.id === id)
     if(index === -1){
-      throw Error(`User with id ${id} doesn't exist!`)
+      throw Error(`Board with id ${id} doesn't exist!`)
     }
     else{
         boards.splice(index,1)
-        Task.removeByBoard(id)
+        return boards;
+
     }
-    return boards;
 
   }
 

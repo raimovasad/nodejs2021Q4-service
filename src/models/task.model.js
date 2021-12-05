@@ -1,5 +1,5 @@
 const {v4:uuid} = require('uuid');
-const {tasks,boards,users} = require('../data/fakedatabase')
+const {tasks} = require('../data/fakedatabase')
 
 class Task {
   constructor({
@@ -46,23 +46,26 @@ class Task {
     if(!tasksDB){
       throw new Error('Internal server error!')
     }
-    const validBoard = boards.find(c=> c.id.toString() === boardId.toString())
-    if(validBoard){
-      throw new Error('Invalid boardId. No such board!')
-    }
-    const validUser = users.find(c=> c.id.toString() === task.userId.toString())
-    if(validUser){
-      throw new Error('Invalid userId. No such user!')
-    }
-    const index = tasks.findIndex( c=> c.id.toString() === id.toString())
-    if(index === -1){
-      throw new Error(`User with id ${id} doesn't exist!`)
-    }
-    tasks[index] = {
+    // const validBoard = boards.find(c=> c.id.toString() === boardId.toString())
+    // if(validBoard){
+    //   throw new Error('Invalid boardId. No such board!')
+    // }
+    // const validUser = users.find(c=> c.id.toString() === task.userId.toString())
+    // if(validUser){
+    //   throw new Error('Invalid userId. No such user!')
+    // }
+    const index = tasks.findIndex( c=> c.id === id)
+    // if(index === -1){
+    //   throw new Error(`User with id ${id} doesn't exist!`)
+    // }
+    const newTask= {
       id,
       ...task
-    }
+    };
+
+    tasks[index] = newTask;
     return tasks[index];
+    
   }
  
   
@@ -75,14 +78,10 @@ class Task {
 
 
 
-  static getById(boardId,id){
+  static getById(id){
     const tasksDB = tasks
     const task = tasksDB.find(c => c.id.toString() === id.toString())
-    if(!task){
-      throw new Error(`Task with id ${id} doesn't exist!`)
-    }else{
       return task;
-    }
   }
 
   static remove(id){
@@ -99,18 +98,16 @@ class Task {
 
   static removeByBoard(boardId){
     const index = tasks.findIndex( c=> c.boardId === boardId)
-    if(index === -1){
-      throw Error(`Task with boarId ${boardId} doesn't exist!`)
-    }
-    else{
-      tasks.splice(index,1)
+    const array = tasks.filter(c=> c.boardId === boardId)
+    if(index !== -1){
+      tasks.splice(index,array.length)
     }
   }
 
   static removeUserId(userId){
       tasks.forEach(task => {
         if(task.userId === userId){
-          task[''] = null
+          task.userId = null
         }
       })
   }
