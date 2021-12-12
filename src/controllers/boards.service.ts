@@ -1,14 +1,21 @@
-const Board = require('../models/board.model');
-const Task = require('../models/task.model')
+import { FastifyRequest, FastifyReply } from "fastify";
 
-function getAllBoards(req,res){
-    const boards = Board.getAll()
+import BoardModel from '../models/board.model';
+import TaskModel from '../models/task.model';
+
+
+function getAllBoards(req: FastifyRequest,res: FastifyReply){
+    const boards = BoardModel.getAll()
     res.send(boards)
 };
 
-function getBoardById(req,res){
+type CustomGetByIdReq = FastifyRequest<{
+    Params:{id: string}
+}>
+
+function getBoardById(req: CustomGetByIdReq,res: FastifyReply){
     const {id} = req.params;
-    const board = Board.getById(id);
+    const board = BoardModel.getById(id);
     if(board){
         res.send(board);
     }
@@ -20,7 +27,12 @@ function getBoardById(req,res){
 
 };
 
-function updateBoard(req,res){
+type CustomUpdateReq = FastifyRequest<{
+    Params:{id: string};
+    Body:{title: string, columns: Array<{id: string, title: string, order: number}>}
+}>
+
+function updateBoard(req: CustomUpdateReq,res: FastifyReply){
     const {id} = req.params;
     const {title,columns} = req.body;
     const board = {
@@ -28,17 +40,21 @@ function updateBoard(req,res){
         columns,
     }
 
-    const updated = Board.update(id,board)
+    const updated = BoardModel.update(id,board)
     res.send(updated);
 };
 
-function addBoard(req,res) { 
+type CustomAddReq = FastifyRequest<{
+    Body:{title: string, columns: Array<{id: string, title: string, order: number}>}
+}>
+
+function addBoard(req: CustomAddReq,res: FastifyReply) { 
     const {title,columns} = req.body
     if(!title || !columns){
         res.send({message:'Not entered the required field!'});
     }
     else{
-        const board = new Board({title,columns})
+        const board = new BoardModel({title,columns})
         try{
            const newBoard = board.save()
            res.statusCode = 201
@@ -50,11 +66,11 @@ function addBoard(req,res) {
     }
  }
 
- function removeBoard(req,res) { 
+ function removeBoard(req: CustomGetByIdReq,res: FastifyReply) { 
     const {id} = req.params;
     try{
-         Board.remove(id)
-        Task.removeByBoard(id)
+        BoardModel.remove(id)
+         TaskModel.removeByBoard(id)
 
         res.statusCode =204
         res.send()
@@ -63,7 +79,7 @@ function addBoard(req,res) {
     }
   }
 
-module.exports = {
+export default {
     getAllBoards,
     getBoardById,
     updateBoard,

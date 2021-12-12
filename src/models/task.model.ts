@@ -1,9 +1,38 @@
-const {v4:uuid} = require('uuid');
-const {tasks} = require('../data/fakedatabase')
+import { v4 as uuidV4 } from 'uuid';
+import fakeDB from '../data/fakedatabase';
+
+
+const {tasks} = fakeDB
+
+
+interface ITask{
+  id: string;
+  title: string;
+  order: number;
+  description: string;
+  userId: string | null;
+  boardId: string | null;
+  columnId: string | null;
+}
 
 class Task {
+
+  public id: string;
+
+  public title: string;
+
+  public order: number;
+
+  public description: string;
+
+  public userId: string | null;
+
+  public boardId: string | null;
+
+  public columnId: string | null;
+
   constructor({
-    id = uuid(),
+    id = uuidV4(),
     title = 'Write essay',
     order = 3,
     description = 'There is 5 essays to write for you',
@@ -41,7 +70,7 @@ class Task {
     return tasks[tasks.length-1];
   } 
 
-  static update(boardId,id,task){
+  static update(boardId: string,id: string,task:ITask){
     const tasksDB = tasks || undefined
     if(!tasksDB){
       throw new Error('Internal server error!')
@@ -54,11 +83,11 @@ class Task {
     // if(validUser){
     //   throw new Error('Invalid userId. No such user!')
     // }
-    const index = tasks.findIndex( c=> c.id === id)
+    const index = tasks.findIndex( (c: ITask)=> c.id === id)
     // if(index === -1){
     //   throw new Error(`User with id ${id} doesn't exist!`)
     // }
-    const newTask= {
+    const newTask : ITask= {
       id,
       ...task
     };
@@ -78,13 +107,13 @@ class Task {
 
 
 
-  static getById(id){
+  static getById(id: string){
     const tasksDB = tasks
     const task = tasksDB.find(c => c.id.toString() === id.toString())
       return task;
   }
 
-  static remove(id){
+  static remove(id: string){
     const index = tasks.findIndex( c=> c.id === id)
     if(index === -1){
       throw Error(`Task with id ${id} doesn't exist!`)
@@ -96,7 +125,7 @@ class Task {
 
   }
 
-  static removeByBoard(boardId){
+  static removeByBoard(boardId: string){
     const index = tasks.findIndex( c=> c.boardId === boardId)
     const array = tasks.filter(c=> c.boardId === boardId)
     if(index !== -1){
@@ -104,7 +133,7 @@ class Task {
     }
   }
 
-  static removeUserId(userId){
+  static removeUserId(userId: string){
       tasks.forEach(task => {
         if(task.userId === userId){
           Object.assign(task,{userId : null})
@@ -114,4 +143,4 @@ class Task {
   
 }
 
-module.exports = Task;
+export default Task;

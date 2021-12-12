@@ -1,7 +1,8 @@
-const boardsService = require('../controllers/boards.service');
+import { FastifyInstance, FastifyPluginCallback, FastifyRegister } from 'fastify';
+import boardsService from '../controllers/boards.service';
 
 
-function boardRoutes(fastify,options,done) {
+function boardRoutes(fastify: FastifyInstance,options: FastifyRegister,done: FastifyPluginCallback<Error>) {
 
   fastify.get('/boards',boardsService.getAllBoards);
 
@@ -11,10 +12,10 @@ function boardRoutes(fastify,options,done) {
   fastify.put('/boards/:id',boardsService.updateBoard)
   fastify.delete('/boards/:id',boardsService.removeBoard)
 
-    done()
+    done(err?: Error):void
 
 }
 
 
 
-module.exports = boardRoutes;
+export default boardRoutes;

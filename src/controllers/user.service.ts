@@ -1,20 +1,21 @@
-const User = require('../models/user.model');
-const Task = require('../models/task.model')
+import { FastifyRequest, FastifyReply } from 'fastify';
+import User from '../models/user.model';
+import Task from '../models/task.model';
 
 
-function getAllUsers(req,res){
+function getAllUsers(req: FastifyRequest,res: FastifyReply){
     const users = User.getAll()
 
     res.send(users.map(user => User.toResponse(user)))
 };
 
-function getUsersById(req,res){
+function getUsersById(req: FastifyRequest,res: FastifyReply){
     const {id} = req.params;
     const user = User.getById(id);
     res.send(User.toResponse(user));
 };
 
-function updateUser(req,res){
+function updateUser(req: FastifyRequest,res: FastifyReply){
     const {id} = req.params;
     const {name,login,password} = req.body;
     const user = {
@@ -26,7 +27,7 @@ function updateUser(req,res){
     res.send(updated);
 };
 
-function addUser(req,res) { 
+function addUser(req: FastifyRequest ,res: FastifyReply) { 
     const {name,login,password} = req.body
     if(!name || !login || !password){
         res.send({message:'Not entered the required field!'});
@@ -44,7 +45,7 @@ function addUser(req,res) {
     }
  }
 
- function removeUser(req,res) { 
+ function removeUser(req: FastifyRequest,res: FastifyReply) { 
     const {id} = req.params;
     try{
         User.remove(id);
@@ -57,7 +58,7 @@ function addUser(req,res) {
     }
   }
 
-module.exports = {
+export default {
     getAllUsers,
     getUsersById,
     addUser,

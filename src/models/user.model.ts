@@ -1,7 +1,31 @@
-const {v4:uuid} = require('uuid');
-const {users} = require('../data/fakedatabase')
+import { v4 as uuid } from 'uuid';
+import FakeDB from '../data/fakedatabase';
+
+const { users } = FakeDB
+
+interface IUser {
+  id: string;
+  name: string;
+  login: string;
+  password: string;
+}
+interface IUserNoId {
+  name: string;
+  login: string;
+  password: string;
+}
 
 class User {
+
+public id: string;
+
+public name: string;
+
+public login: string;
+
+public password: string;
+
+
   constructor({
     id = uuid(),
     name = 'USER',
@@ -14,7 +38,7 @@ class User {
     this.password = password;
   }
 
-  toSaveUser(){
+  toSaveUser():IUser{
     return {
       id: this.id,
       name: this.name,
@@ -32,12 +56,12 @@ class User {
     return this.toSaveUser();
   } 
 
-  static update(id,user){
+  static update(id: string,user: IUserNoId){
     const usersDB = users || undefined
     if(!usersDB){
       throw new Error('Internal server error!')
     }
-    const index = users.findIndex( c=> c.id.toString() === id.toString())
+    const index = users.findIndex( (c: IUser)=> c.id === id)
     if(index === -1){
       throw new Error(`User with id ${id} doesn't exist!`)
     }
@@ -48,7 +72,7 @@ class User {
     return users[index];
   }
  
-  static toResponse(user) {
+  static toResponse(user:IUser) {
     const { id, name, login } = user;
     return { id, name, login };
   }
@@ -60,7 +84,7 @@ class User {
 
 
 
-  static getById(id){
+  static getById(id: string){
     const usersDB = users
     const user = usersDB.find(c => c.id.toString() === id.toString())
     if(!user){
@@ -70,7 +94,7 @@ class User {
     }
   }
 
-  static remove(id){
+  static remove(id: string){
     const index = users.findIndex( c=> c.id === id)
     if(index === -1){
       throw Error(`User with id ${id} doesn't exist!`)
@@ -85,4 +109,4 @@ class User {
   
 }
 
-module.exports = User;
+export default User;

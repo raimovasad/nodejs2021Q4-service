@@ -1,4 +1,4 @@
-const taskService = require('../controllers/task.service');
+import taskService from '../controllers/task.service';
 
 
 function taskRoutes(fastify,options,done) {
@@ -14,4 +14,4 @@ function taskRoutes(fastify,options,done) {
 
 
 
-module.exports = taskRoutes;
+export default taskRoutes;

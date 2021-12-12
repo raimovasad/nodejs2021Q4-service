@@ -16,18 +16,23 @@ module.exports ={
       impliedStrict: true
     },
     tsconfigRootDir: __dirname,
-    project: ['./tsconfig.json']
   },
   plugins:[
-    '@typescript-eslint'
+    '@typescript-eslint',
+    "eslint-plugin-tsdoc"
   ],
   settings: {
     "noInlineConfig": true,
     "import/resolver":{
       "node":{
-        "extensions":[".js",".jsx",".ts",".tsx"]
+        "extensions":[".js",".jsx",".ts",".tsx",".cjs"]
       }
-    }
+    },
+    "node": {
+      "allowModules": ["electron"],
+      "resolvePaths": [__dirname],
+      "tryExtensions": [".js", ".json", ".node",".ts",".cjs"]
+  }
   },
   extends: [
     "eslint:recommended",
@@ -37,6 +42,11 @@ module.exports ={
     "prettier"
   ],
   rules: {
+    "node/no-missing-require": ["error", {
+      "allowModules": ["electron"],
+      "resolvePaths": ["/path/to/a/modules/directory"],
+      "tryExtensions": [".js", ".json", ".node",".ts",".cjs"]
+    }],
     "import/extensions": "off",
     "linebreak-style": "off",
     "node/no-unsupported-features/es-syntax": "off",

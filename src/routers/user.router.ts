@@ -1,7 +1,8 @@
-const usersService = require('../controllers/user.service');
+import { FastifyContext, FastifyInstance, FastifyRegisterOptions } from 'fastify';
+import usersService from '../controllers/user.service';
 
 
-function userRoutes(fastify,options,done) {
+function userRoutes(fastify: FastifyInstance,options: FastifyRegisterOptions<FastifyContext>,done: ) {
 
   fastify.get('/users',usersService.getAllUsers);
 
@@ -19,4 +20,4 @@ function userRoutes(fastify,options,done) {
 
 
 
-module.exports = userRoutes;
+export default userRoutes;
