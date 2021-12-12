@@ -1,7 +1,9 @@
+import { FastifyInstance, FastifyPluginAsync } from 'fastify';
+import fp from 'fastify-plugin'
 import taskService from '../controllers/task.service';
 
 
-function taskRoutes(fastify,options,done) {
+const taskRoutes: FastifyPluginAsync = async(fastify: FastifyInstance)=>{
 
   fastify.get('/boards/:boardId/tasks',taskService.getAllTasks);
   fastify.post('/boards/:boardId/tasks',taskService.addTask)
@@ -9,9 +11,9 @@ function taskRoutes(fastify,options,done) {
   fastify.put('/boards/:boardId/tasks/:id',taskService.updateTask)
   fastify.delete('/boards/:boardId/tasks/:id',taskService.removeTask)
 
-    done()
+    
 }
 
 
 
-export default taskRoutes;
+export default fp(taskRoutes);

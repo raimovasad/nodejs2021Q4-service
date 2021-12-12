@@ -4,7 +4,7 @@ import BoardModel from '../models/board.model';
 import TaskModel from '../models/task.model';
 
 
-function getAllBoards(req: FastifyRequest,res: FastifyReply){
+async function getAllBoards(req: FastifyRequest,res: FastifyReply){
     const boards = BoardModel.getAll()
     res.send(boards)
 };
@@ -13,7 +13,7 @@ type CustomGetByIdReq = FastifyRequest<{
     Params:{id: string}
 }>
 
-function getBoardById(req: CustomGetByIdReq,res: FastifyReply){
+async function getBoardById(req: CustomGetByIdReq,res: FastifyReply){
     const {id} = req.params;
     const board = BoardModel.getById(id);
     if(board){
@@ -32,7 +32,7 @@ type CustomUpdateReq = FastifyRequest<{
     Body:{title: string, columns: Array<{id: string, title: string, order: number}>}
 }>
 
-function updateBoard(req: CustomUpdateReq,res: FastifyReply){
+async function updateBoard(req: CustomUpdateReq,res: FastifyReply){
     const {id} = req.params;
     const {title,columns} = req.body;
     const board = {
@@ -48,25 +48,20 @@ type CustomAddReq = FastifyRequest<{
     Body:{title: string, columns: Array<{id: string, title: string, order: number}>}
 }>
 
-function addBoard(req: CustomAddReq,res: FastifyReply) { 
+async function addBoard(req: CustomAddReq,res: FastifyReply) { 
     const {title,columns} = req.body
     if(!title || !columns){
         res.send({message:'Not entered the required field!'});
     }
     else{
         const board = new BoardModel({title,columns})
-        try{
            const newBoard = board.save()
            res.statusCode = 201
            res.send(newBoard)
-        }
-        catch(err){
-            res.send({message: `${err.message}`})
-        }
     }
  }
 
- function removeBoard(req: CustomGetByIdReq,res: FastifyReply) { 
+async function removeBoard(req: CustomGetByIdReq,res: FastifyReply) { 
     const {id} = req.params;
     try{
         BoardModel.remove(id)

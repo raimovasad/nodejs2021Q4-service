@@ -1,8 +1,9 @@
-import { FastifyContext, FastifyInstance, FastifyRegisterOptions } from 'fastify';
+import { FastifyInstance, FastifyPluginAsync } from 'fastify';
+import fp from 'fastify-plugin'
 import usersService from '../controllers/user.service';
 
 
-function userRoutes(fastify: FastifyInstance,options: FastifyRegisterOptions<FastifyContext>,done: ) {
+const userRoute: FastifyPluginAsync = async  (fastify: FastifyInstance )=>{
 
   fastify.get('/users',usersService.getAllUsers);
 
@@ -13,11 +14,9 @@ function userRoutes(fastify: FastifyInstance,options: FastifyRegisterOptions<Fas
   fastify.delete('/users/:id',usersService.removeUser)
 
 
-    done()
-
 }
 
 
 
 
-export default userRoutes;
+export default fp(userRoute);

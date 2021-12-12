@@ -3,7 +3,11 @@ import uuidTask from 'uuid';
 import TaskMain from '../models/task.model';
 
 
-function getAllTasks(req: FastifyRequest,res: FastifyReply){
+type getAllReq = FastifyRequest<{
+    Params: { boardId: string}
+}>
+
+async function getAllTasks(req: getAllReq,res: FastifyReply){
     const {boardId} = req.params;
     const validId = uuidTask.validate(boardId);
     if(validId){
@@ -17,9 +21,11 @@ function getAllTasks(req: FastifyRequest,res: FastifyReply){
     
 };
 
+type getByIdReq = FastifyRequest<{
+    Params:{id: string}
+}>
 
-
-function getTaskById(req:FastifyRequest,res: FastifyReply){
+async function getTaskById(req:getByIdReq,res: FastifyReply){
     const {id} = req.params;
     // const validId = uuidTask.validate(boardId);
     // const validTaskId = uuidTask.validate(id);
@@ -36,7 +42,7 @@ function getTaskById(req:FastifyRequest,res: FastifyReply){
     
         }catch(error){
             res.statusCode = 404;
-            res.send(`${error.message}`)
+            res.send(`${String(error)}`)
         }
     // }
     // else{
@@ -52,14 +58,34 @@ function getTaskById(req:FastifyRequest,res: FastifyReply){
 
 };
 
-function updateTask(req: FastifyRequest,res: FastifyReply){
+type updateTaskReq = FastifyRequest<{
+    Params:{id: string},
+    Body:{
+        title: string,
+        order: number, 
+        description: string,
+        userId:string, 
+        columnId: string, 
+        boardId: string
+    }
+}>
+interface Itask {
+    title: string,
+    order: number,
+    description: string,
+    userId: string,
+    boardId: string,
+    columnId: string, 
+}
+
+async function updateTask(req: updateTaskReq,res: FastifyReply){
     const {id} = req.params;
     // const validId = uuidTask.validate(boardId);
     // const validTaskId = uuidTask.validate(id);
     // if(validId && validTaskId){
         const {title,order,description,userId,columnId,boardId} = req.body;
         
-        const task = {
+        const task:Itask = {
             title,
             order,
             description,
@@ -71,7 +97,7 @@ function updateTask(req: FastifyRequest,res: FastifyReply){
             const updated = TaskMain.update(boardId,id,task)
             res.send(updated);
          }catch(error){
-            res.send(`${error.message}`)
+            req.log.error(`${String(error)}`)
          }
     // }
     // else{
@@ -86,8 +112,13 @@ function updateTask(req: FastifyRequest,res: FastifyReply){
    
 };
 
-function addTask(req: FastifyRequest,res: FastifyReply) { 
-        const boardIdReq = req.params.boardId
+type addReq = FastifyRequest<{
+    Params: {boardId: string},
+    Body:{title: string,order: number,description: string,userId: string,columnId: string}
+}>
+
+async function addTask(req: addReq,res: FastifyReply) { 
+        const {boardId:boardIdReq} = req.params
         const {title,order,description,userId,columnId} = req.body
         
             const task = new TaskMain({
@@ -104,12 +135,12 @@ function addTask(req: FastifyRequest,res: FastifyReply) {
                res.send(newTask)
             }
             catch(err){
-                res.send({message: `${err.message}`})
+                res.send({message: `${String(err)}`})
             } 
    
  }
 
- function removeTask(req:FastifyRequest,res: FastifyReply) { 
+async function removeTask(req:getByIdReq,res: FastifyReply) { 
     const {id} = req.params;
     // const validBoard = Board.getById(boardId)
     // const validId = uuidTask.validate(boardId);

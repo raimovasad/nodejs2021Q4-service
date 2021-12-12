@@ -2,11 +2,10 @@ import { v4 as uuidV4 } from 'uuid';
 import fakeDB from '../data/fakedatabase';
 
 
-const {tasks} = fakeDB
 
 
 interface ITask{
-  id: string;
+  id?: string;
   title: string;
   order: number;
   description: string;
@@ -14,6 +13,8 @@ interface ITask{
   boardId: string | null;
   columnId: string | null;
 }
+
+const {tasks} = fakeDB
 
 class Task {
 
@@ -62,7 +63,7 @@ class Task {
   }
 
   save(){
-    const tasksDB = tasks || undefined
+    const tasksDB: Array<ITask> = tasks || undefined
     if(!tasksDB){
       throw new Error('Internal server error!')
     }
@@ -109,7 +110,7 @@ class Task {
 
   static getById(id: string){
     const tasksDB = tasks
-    const task = tasksDB.find(c => c.id.toString() === id.toString())
+    const task = tasksDB.find(c => c.id === id)
       return task;
   }
 

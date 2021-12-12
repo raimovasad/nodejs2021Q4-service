@@ -3,19 +3,40 @@ import User from '../models/user.model';
 import Task from '../models/task.model';
 
 
-function getAllUsers(req: FastifyRequest,res: FastifyReply){
-    const users = User.getAll()
+
+type getUserByIdReq = FastifyRequest<{
+Params: { id: string}
+}>
+
+type updateUserReq = FastifyRequest<{
+Params: { id: string},
+Body:{name: string, login: string, password: string}
+}>
+type addUserReq = FastifyRequest<{
+Body:{name: string, login: string, password: string}
+}>
+
+interface Iuser {
+    id: string,
+    name: string,
+    login: string,
+    password: string
+}
+
+
+async function getAllUsers(req: FastifyRequest,res: FastifyReply){
+    const users: Array<Iuser> = User.getAll()
 
     res.send(users.map(user => User.toResponse(user)))
 };
 
-function getUsersById(req: FastifyRequest,res: FastifyReply){
+async function getUsersById(req: getUserByIdReq,res: FastifyReply){
     const {id} = req.params;
     const user = User.getById(id);
     res.send(User.toResponse(user));
 };
 
-function updateUser(req: FastifyRequest,res: FastifyReply){
+async function updateUser(req: updateUserReq,res: FastifyReply){
     const {id} = req.params;
     const {name,login,password} = req.body;
     const user = {
@@ -27,7 +48,7 @@ function updateUser(req: FastifyRequest,res: FastifyReply){
     res.send(updated);
 };
 
-function addUser(req: FastifyRequest ,res: FastifyReply) { 
+async function addUser(req: addUserReq ,res: FastifyReply) { 
     const {name,login,password} = req.body
     if(!name || !login || !password){
         res.send({message:'Not entered the required field!'});
@@ -40,12 +61,12 @@ function addUser(req: FastifyRequest ,res: FastifyReply) {
             res.send(User.toResponse(newUser))
         }
         catch(err){
-            res.send({message: `${err.message}`})
+            res.send({message: `${String(err)}`})
         }
     }
  }
 
- function removeUser(req: FastifyRequest,res: FastifyReply) { 
+ async function removeUser(req: getUserByIdReq,res: FastifyReply) { 
     const {id} = req.params;
     try{
         User.remove(id);
