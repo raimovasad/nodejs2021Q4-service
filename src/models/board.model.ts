@@ -1,8 +1,8 @@
 import {v4 as uuidM} from "uuid"
 import fakeDB from '../data/fakedatabase';
 
-const {boards} = fakeDB
 
+const {boards} = fakeDB
 
 
 interface IColumn {
@@ -11,7 +11,7 @@ interface IColumn {
   order: number;
 }
 interface IBoard {
-  id: string;
+  id?: string;
   title: string;
   columns: Array<{id:string;title:string;order:number}>;
 }
@@ -25,7 +25,7 @@ class Board {
   public columns: Array<{id:string;title:string;order:number}>;
   
   constructor({
-    id = uuidM.v4(),
+    id = uuidM(),
     title = 'REST',
     columns = [{id:'dasdasd',title: 'do smth', order: 12}]
   } = {}) {
@@ -47,22 +47,21 @@ class Board {
    parseColumns(){
     const cols = this.columns.map((col:IColumn) => {
         const {title,order} = col;
-        const column ={id: uuidM.v4(),title,order}
+        const column ={id: uuidM(),title,order}
         return column
     })
      return cols;
   }
 
-  save(){
-    const boardsDB = boards || undefined
-    if(!boardsDB){
+   save(){
+    if(!boards){
       throw new Error('Internal server error!')
     }
     boards.push(this.toSaveBoard())
     return boards[boards.length-1];
   } 
 
-  static update(id,board){
+  static update(id: string,board: IBoard){
     const usersDB = boards || undefined
     if(!usersDB){
       throw new Error('Internal server error!')

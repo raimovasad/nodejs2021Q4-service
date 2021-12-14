@@ -40,9 +40,11 @@ async function getTaskById(req:getByIdReq,res: FastifyReply){
                 res.send('No such task!')
             }
     
-        }catch(error){
-            res.statusCode = 404;
-            res.send(`${String(error)}`)
+        }catch(error: unknown){
+            if( error instanceof Error){
+                res.statusCode = 404;
+                res.send(`${error.message}`)
+            }
         }
     // }
     // else{
@@ -79,10 +81,10 @@ interface Itask {
 }
 
 async function updateTask(req: updateTaskReq,res: FastifyReply){
-    const {id} = req.params;
     // const validId = uuidTask.validate(boardId);
     // const validTaskId = uuidTask.validate(id);
     // if(validId && validTaskId){
+        const {id} = req.params;
         const {title,order,description,userId,columnId,boardId} = req.body;
         
         const task:Itask = {
@@ -95,9 +97,11 @@ async function updateTask(req: updateTaskReq,res: FastifyReply){
          };
          try{
             const updated = TaskMain.update(boardId,id,task)
-            res.send(updated);
-         }catch(error){
-            req.log.error(`${String(error)}`)
+              res.send(updated);
+         }catch(error: unknown){
+             if( error instanceof Error){
+                res.send(`${error.message}`)
+             }
          }
     // }
     // else{

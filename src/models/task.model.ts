@@ -71,7 +71,7 @@ class Task {
     return tasks[tasks.length-1];
   } 
 
-  static update(boardId: string,id: string,task:ITask){
+  static update(id: string,task:ITask){
     const tasksDB = tasks || undefined
     if(!tasksDB){
       throw new Error('Internal server error!')

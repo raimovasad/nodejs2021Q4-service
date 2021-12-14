@@ -1,11 +1,39 @@
-interface IfakeDB {
-    users: Array<{id:'',name:'',login:'', password: ''}>;
-    boards: Array<object>;
-    tasks: Array<{id: string,title: string,order: number,description: string,userId: string,boardId: string,columnId: string}>;
+interface IUserDB {
+    id: string,name: string,login: string, password: string
 }
-const fakeDB: IfakeDB ={
-    users:[{id:'',name:'',login:'', password: ''}],
-    boards:[{id:'',title:'',order:0,description: '',userId:'',boardId:'',columnId:''}],
-    tasks:[{id:'',title:'',order:0,description: '',userId:'',boardId:'',columnId:''}]
+
+interface IBoardDB {
+    id: string,
+    title: string,
+    columns: Array<{id: string,title: string,order: number}>
 }
-export default fakeDB
+
+interface ITaskDB {
+    id: string,
+    title: string,
+    order: number,
+    description: string,
+    userId: string,
+    boardId: string,
+    columnId: string
+}
+
+type UserDB = Array<IUserDB>
+type BoardDB = Array<IBoardDB>
+type TaskDB = Array<ITaskDB>
+
+
+
+declare const users: UserDB
+
+
+declare const boards: BoardDB
+
+declare const tasks: TaskDB
+
+
+export default {
+    users,
+    boards,
+    tasks
+}

@@ -32,15 +32,21 @@ type CustomUpdateReq = FastifyRequest<{
     Body:{title: string, columns: Array<{id: string, title: string, order: number}>}
 }>
 
+interface Board{
+    id?: string;
+    title: string;
+    columns: Array<{id: string, title: string, order: number}> 
+}
+
 async function updateBoard(req: CustomUpdateReq,res: FastifyReply){
     const {id} = req.params;
     const {title,columns} = req.body;
-    const board = {
+    const board:Board = {
         title,
         columns,
     }
 
-    const updated = BoardModel.update(id,board)
+    const updated = BoardModel.update(id, board)
     res.send(updated);
 };
 
