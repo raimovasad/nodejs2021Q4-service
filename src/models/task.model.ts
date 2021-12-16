@@ -1,5 +1,4 @@
 import { v4 as uuidV4 } from 'uuid';
-import fakeDB from '../data/fakedatabase';
 
 
 
@@ -14,7 +13,8 @@ interface ITask{
   columnId: string | null;
 }
 
-const {tasks} = fakeDB
+
+ const tasks: ITask[] = []
 
 class Task {
 
@@ -50,7 +50,16 @@ class Task {
     this.columnId = columnId;
   }
 
-  toSaveTask(){
+ 
+
+     /**
+   * Returns the user params as an object.
+   *
+   *
+   * @returns The user object that is going to be save
+   *
+   */
+  toSaveTask(): ITask{
     return {
       id: this.id,
       title: this.title,
@@ -62,7 +71,7 @@ class Task {
     }
   }
 
-  save(){
+  save(): ITask{
     const tasksDB: Array<ITask> = tasks || undefined
     if(!tasksDB){
       throw new Error('Internal server error!')
@@ -71,7 +80,17 @@ class Task {
     return tasks[tasks.length-1];
   } 
 
-  static update(id: string,task:ITask){
+   /**
+   * Updates the user by in database.
+   *
+   *
+   * @param id - The id of the task  
+   * @param task - The object of the task  
+   * @returns The new task object that is saved
+   * @throws An Error if there is no access to database
+   */
+
+  static update(id: string,task:ITask): ITask{
     const tasksDB = tasks || undefined
     if(!tasksDB){
       throw new Error('Internal server error!')
@@ -98,7 +117,12 @@ class Task {
     
   }
  
-  
+   /**
+   * Returns all tasks in database.
+   *
+   *
+   * @returns All tasks in database
+   */
 
   static getAll(){
       return tasks;
@@ -106,15 +130,34 @@ class Task {
     // return boardTasks;
   }
 
+  /**
+   * Returns the user by id.
+   *
+   *
+   * @param id - The id of the user  
+   * @returns The user object
+   * @throws An Error if the user with that id doesn't exist
+   */
 
-
-  static getById(id: string){
+  static getById(id: string): ITask | never{
     const tasksDB = tasks
     const task = tasksDB.find(c => c.id === id)
+    if(!task){
+      throw new Error(`There is no such task with the id ${id}`)
+    }
       return task;
   }
 
-  static remove(id: string){
+  /**
+   * Removes the task by id.
+   *
+   *
+   * @param id - The id of the task  
+   * @throws An Error if the task with that id doesn't exist
+   */
+
+
+  static remove(id: string): ITask[]{
     const index = tasks.findIndex( c=> c.id === id)
     if(index === -1){
       throw Error(`Task with id ${id} doesn't exist!`)
@@ -126,7 +169,14 @@ class Task {
 
   }
 
-  static removeByBoard(boardId: string){
+  /**
+   * Removes the task by boardId when the board is removed.
+   *
+   *
+   * @param boardId - The id of the board of the task  
+   */
+
+  static removeByBoard(boardId: string): void{
     const index = tasks.findIndex( c=> c.boardId === boardId)
     const array = tasks.filter(c=> c.boardId === boardId)
     if(index !== -1){
@@ -134,7 +184,14 @@ class Task {
     }
   }
 
-  static removeUserId(userId: string){
+  /**
+   * Removes the feature userId in the task when the user is removed.
+   *
+   *
+   * @param userId - The id of the user of the task  
+   */
+
+  static removeUserId(userId: string): void{
       tasks.forEach(task => {
         if(task.userId === userId){
           Object.assign(task,{userId : null})

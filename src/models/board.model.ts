@@ -1,20 +1,20 @@
 import {v4 as uuidM} from "uuid"
-import fakeDB from '../data/fakedatabase';
 
 
-const {boards} = fakeDB
-
+interface IBoard {
+  id?: string;
+  title: string;
+  columns: Array<{id:string;title:string;order:number}>;
+}
 
 interface IColumn {
   id: string;
   title: string;
   order: number;
 }
-interface IBoard {
-  id?: string;
-  title: string;
-  columns: Array<{id:string;title:string;order:number}>;
-}
+
+ const boards: IBoard[]=[]
+
 
 class Board {
 
@@ -66,7 +66,7 @@ class Board {
     if(!usersDB){
       throw new Error('Internal server error!')
     }
-    const index = boards.findIndex( c=> c.id.toString() === id.toString())
+    const index = boards.findIndex( c=> c.id === id)
     if(index === -1){
       throw new Error(`Board with id ${id} doesn't exist!`)
     }

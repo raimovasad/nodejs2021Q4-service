@@ -12,6 +12,7 @@ type updateUserReq = FastifyRequest<{
 Params: { id: string},
 Body:{name: string, login: string, password: string}
 }>
+
 type addUserReq = FastifyRequest<{
 Body:{name: string, login: string, password: string}
 }>
@@ -24,17 +25,44 @@ interface Iuser {
 }
 
 
+/**
+ * getAllUsers
+ * This function gets ```All``` users and sends it to client
+ * 
+ * 
+ * @param req 
+ * @param res 
+ */
+
 async function getAllUsers(req: FastifyRequest,res: FastifyReply){
     const users: Array<Iuser> = User.getAll()
 
     res.send(users.map(user => User.toResponse(user)))
 };
 
+/**
+ * getUsersById
+ * This function gets the user by id and sends it to client
+ * 
+ * 
+ * @param req 
+ * @param res 
+ */
+
 async function getUsersById(req: getUserByIdReq,res: FastifyReply){
     const {id} = req.params;
     const user = User.getById(id);
     res.send(User.toResponse(user));
 };
+
+/**
+ * updateUser
+ * This function updates the user by id and sends it to client
+ * 
+ * 
+ * @param req 
+ * @param res 
+ */
 
 async function updateUser(req: updateUserReq,res: FastifyReply){
     const {id} = req.params;
@@ -47,6 +75,15 @@ async function updateUser(req: updateUserReq,res: FastifyReply){
     const updated = User.update(id,user)
     res.send(updated);
 };
+
+/**
+ * addUser
+ * This function adds new user and sends it to client
+ * 
+ * 
+ * @param req 
+ * @param res 
+ */
 
 async function addUser(req: addUserReq ,res: FastifyReply) { 
     const {name,login,password} = req.body
@@ -65,6 +102,16 @@ async function addUser(req: addUserReq ,res: FastifyReply) {
         }
     }
  }
+
+
+ 
+/**
+ * removeUser
+ * This function removes the user by id
+ * 
+ * @param req 
+ * @param res 
+ */
 
  async function removeUser(req: getUserByIdReq,res: FastifyReply) { 
     const {id} = req.params;

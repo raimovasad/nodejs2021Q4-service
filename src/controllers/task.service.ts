@@ -1,5 +1,5 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
-import uuidTask from 'uuid';
+import {validate} from 'uuid';
 import TaskMain from '../models/task.model';
 
 
@@ -7,9 +7,41 @@ type getAllReq = FastifyRequest<{
     Params: { boardId: string}
 }>
 
+type getByIdReq = FastifyRequest<{
+    Params:{id: string}
+}>
+
+
+type updateTaskReq = FastifyRequest<{
+    Params:{id: string},
+    Body:{
+        title: string,
+        order: number, 
+        description: string,
+        userId:string, 
+        columnId: string, 
+        boardId: string
+    }
+}>
+
+interface Itask {
+    title: string,
+    order: number,
+    description: string,
+    userId: string,
+    boardId: string,
+    columnId: string, 
+}
+
+type addReq = FastifyRequest<{
+    Params: {boardId: string},
+    Body:{title: string,order: number,description: string,userId: string,columnId: string}
+}>
+
+
 async function getAllTasks(req: getAllReq,res: FastifyReply){
     const {boardId} = req.params;
-    const validId = uuidTask.validate(boardId);
+    const validId = validate(boardId);
     if(validId){
         const tasks = TaskMain.getAll();
         res.send(tasks);
@@ -21,11 +53,17 @@ async function getAllTasks(req: getAllReq,res: FastifyReply){
     
 };
 
-type getByIdReq = FastifyRequest<{
-    Params:{id: string}
-}>
+/**
+ * getTaskById
+ * This function get the task by id and sends it to client
+ * 
+ * 
+ * @param req 
+ * @param res 
+ */
 
-async function getTaskById(req:getByIdReq,res: FastifyReply){
+
+async function getTaskById(req:getByIdReq,res: FastifyReply): Promise<void>{
     const {id} = req.params;
     // const validId = uuidTask.validate(boardId);
     // const validTaskId = uuidTask.validate(id);
@@ -60,25 +98,14 @@ async function getTaskById(req:getByIdReq,res: FastifyReply){
 
 };
 
-type updateTaskReq = FastifyRequest<{
-    Params:{id: string},
-    Body:{
-        title: string,
-        order: number, 
-        description: string,
-        userId:string, 
-        columnId: string, 
-        boardId: string
-    }
-}>
-interface Itask {
-    title: string,
-    order: number,
-    description: string,
-    userId: string,
-    boardId: string,
-    columnId: string, 
-}
+/**
+ * getTaskById
+ * This function updates the task by id and sends it to client
+ * 
+ * 
+ * @param req 
+ * @param res 
+ */
 
 async function updateTask(req: updateTaskReq,res: FastifyReply){
     // const validId = uuidTask.validate(boardId);
@@ -96,7 +123,7 @@ async function updateTask(req: updateTaskReq,res: FastifyReply){
             columnId,
          };
          try{
-            const updated = TaskMain.update(boardId,id,task)
+            const updated = TaskMain.update(id,task)
               res.send(updated);
          }catch(error: unknown){
              if( error instanceof Error){
@@ -116,10 +143,15 @@ async function updateTask(req: updateTaskReq,res: FastifyReply){
    
 };
 
-type addReq = FastifyRequest<{
-    Params: {boardId: string},
-    Body:{title: string,order: number,description: string,userId: string,columnId: string}
-}>
+
+/**
+ * getTaskById
+ * This function adds new task and sends it to client
+ * 
+ * 
+ * @param req 
+ * @param res 
+ */
 
 async function addTask(req: addReq,res: FastifyReply) { 
         const {boardId:boardIdReq} = req.params
@@ -143,6 +175,16 @@ async function addTask(req: addReq,res: FastifyReply) {
             } 
    
  }
+
+
+ /**
+ * getTaskById
+ * This function removes the task by id
+ * 
+ * 
+ * @param req 
+ * @param res 
+ */
 
 async function removeTask(req:getByIdReq,res: FastifyReply) { 
     const {id} = req.params;

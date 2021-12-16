@@ -9,13 +9,13 @@ interface IBoardDB {
 }
 
 interface ITaskDB {
-    id: string,
+    id?: string,
     title: string,
     order: number,
     description: string,
-    userId: string,
-    boardId: string,
-    columnId: string
+    userId: string | null,
+    boardId: string | null,
+    columnId: string | null
 }
 
 type UserDB = Array<IUserDB>
@@ -35,5 +35,5 @@ declare const tasks: TaskDB
 export default {
     users,
     boards,
-    tasks
+    tasks,
 }

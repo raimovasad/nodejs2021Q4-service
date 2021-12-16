@@ -4,16 +4,50 @@ import BoardModel from '../models/board.model';
 import TaskModel from '../models/task.model';
 
 
-async function getAllBoards(req: FastifyRequest,res: FastifyReply){
-    const boards = BoardModel.getAll()
-    res.send(boards)
-};
+type CustomUpdateReq = FastifyRequest<{
+    Params:{id: string};
+    Body:{title: string, columns: Array<{id: string, title: string, order: number}>}
+}>
+
+interface Board{
+    id?: string;
+    title: string;
+    columns: Array<{id: string, title: string, order: number}> 
+}
+
+type CustomAddReq = FastifyRequest<{
+    Body:{title: string, columns: Array<{id: string, title: string, order: number}>}
+}>
 
 type CustomGetByIdReq = FastifyRequest<{
     Params:{id: string}
 }>
 
-async function getBoardById(req: CustomGetByIdReq,res: FastifyReply){
+
+
+/**
+ * This function sends All boards to the client
+ * 
+ * 
+ * @param req - fastify request 
+ * @param res - fastify response
+ */
+
+async function getAllBoards(req: FastifyRequest,res: FastifyReply): Promise<void>{
+    const boards = BoardModel.getAll()
+    res.send(boards)
+};
+
+
+/**
+ * This function sends board by id to the client
+ * 
+ * 
+ * @param req - fastify request 
+ * @param res - fastify response
+ */
+
+async function getBoardById(req: CustomGetByIdReq,res: FastifyReply): Promise<void>{
     const {id} = req.params;
     const board = BoardModel.getById(id);
     if(board){
@@ -27,18 +61,14 @@ async function getBoardById(req: CustomGetByIdReq,res: FastifyReply){
 
 };
 
-type CustomUpdateReq = FastifyRequest<{
-    Params:{id: string};
-    Body:{title: string, columns: Array<{id: string, title: string, order: number}>}
-}>
-
-interface Board{
-    id?: string;
-    title: string;
-    columns: Array<{id: string, title: string, order: number}> 
-}
-
-async function updateBoard(req: CustomUpdateReq,res: FastifyReply){
+/**
+ * This function updates board by id and send the updated board to the client
+ * 
+ * 
+ * @param req - fastify request 
+ * @param res - fastify response
+ */
+async function updateBoard(req: CustomUpdateReq,res: FastifyReply): Promise<void>{
     const {id} = req.params;
     const {title,columns} = req.body;
     const board:Board = {
@@ -50,11 +80,15 @@ async function updateBoard(req: CustomUpdateReq,res: FastifyReply){
     res.send(updated);
 };
 
-type CustomAddReq = FastifyRequest<{
-    Body:{title: string, columns: Array<{id: string, title: string, order: number}>}
-}>
+/**
+ * This function adds new board and send the updated board to the client
+ * 
+ * 
+ * @param req - fastify request 
+ * @param res - fastify response
+ */
 
-async function addBoard(req: CustomAddReq,res: FastifyReply) { 
+async function addBoard(req: CustomAddReq,res: FastifyReply): Promise<void> { 
     const {title,columns} = req.body
     if(!title || !columns){
         res.send({message:'Not entered the required field!'});
@@ -67,7 +101,15 @@ async function addBoard(req: CustomAddReq,res: FastifyReply) {
     }
  }
 
-async function removeBoard(req: CustomGetByIdReq,res: FastifyReply) { 
+ /**
+ * This function removes board by id 
+ * 
+ * 
+ * @param req - fastify request 
+ * @param res - fastify response
+ */
+
+async function removeBoard(req: CustomGetByIdReq,res: FastifyReply): Promise<void> { 
     const {id} = req.params;
     try{
         BoardModel.remove(id)

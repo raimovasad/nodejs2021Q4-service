@@ -44,7 +44,7 @@ module.exports ={
   rules: {
     "node/no-missing-require": ["error", {
       "allowModules": ["electron"],
-      "resolvePaths": ["/path/to/a/modules/directory"],
+      "resolvePaths": ["/node_modules"],
       "tryExtensions": [".js", ".json", ".node",".ts",".cjs"]
     }],
     "import/extensions": "off",
