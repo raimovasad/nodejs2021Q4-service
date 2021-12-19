@@ -49,14 +49,17 @@ async function getAllBoards(req: FastifyRequest,res: FastifyReply): Promise<void
 
 async function getBoardById(req: CustomGetByIdReq,res: FastifyReply): Promise<void>{
     const {id} = req.params;
+    try{
     const board = BoardModel.getById(id);
-    if(board){
-        res.send(board);
+    res.send(board);
+    }catch(e){
+       if(e instanceof Error){
+        res.statusCode = 404
+        res.send(`${e.message}`)
+       }
     }
-    else{
-    res.statusCode = 404
-    res.send(`No such board!`)
-    }
+    
+    
        
 
 };
