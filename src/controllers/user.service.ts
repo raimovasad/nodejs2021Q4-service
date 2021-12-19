@@ -104,7 +104,7 @@ async function addUser(req: addUserReq ,res: FastifyReply): Promise<void> {
 /**
  * This function removes the user by id
  * 
- * @param req - getUserByIdReq request
+ * @param req - fastify request
  * @param res - fastify reply
  */
 

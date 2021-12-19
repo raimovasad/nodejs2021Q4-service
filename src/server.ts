@@ -7,7 +7,7 @@ const {PORT} = Config
 
 
 /**
- * Starts server working
+ * Makes server working
  * 
  * 
  * 

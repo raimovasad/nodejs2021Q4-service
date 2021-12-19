@@ -88,13 +88,13 @@ class Task {
   } 
 
    /**
-   * Updates the user by in database.
+   * Updates the task by id in database.
    *
    *
    * @param id - The id of the task  
    * @param task - The object of the task  
    * @returns The new task object that is saved
-   * @throws An Error if there is no access to database
+   * @throws Error if there is no access to database
    */
 
   static update(id: string,task:ITask): ITask{
@@ -138,12 +138,12 @@ class Task {
   }
 
   /**
-   * Returns the user by id.
+   * Returns the task by id.
    *
    *
-   * @param id - The id of the user  
-   * @returns The user object
-   * @throws Throws new Error if the user with that id doesn't exist
+   * @param id - The id of the task  
+   * @returns The task object
+   * @throws Error if the task with that id doesn't exist
    */
 
   static getById(id: string): ITask{

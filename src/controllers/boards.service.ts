@@ -88,7 +88,7 @@ async function updateBoard(req: CustomUpdateReq,res: FastifyReply): Promise<void
  * This function adds new board and send the board to the client
  * 
  * 
- * @param req - CustomAddReq request 
+ * @param req - fastify request 
  * @param res - fastify response
  */
 
@@ -109,7 +109,7 @@ async function addBoard(req: CustomAddReq,res: FastifyReply): Promise<void> {
  * This function removes board by id 
  * 
  * 
- * @param req - CustomGetByIdReq request 
+ * @param req - fastify request 
  * @param res - fastify response
  */
 

@@ -72,6 +72,7 @@ fastify.register(taskRouter)
  * @param handler - function that should work when path is called
  * 
  */
+
 fastify.get('/',(req: FastifyRequest,res: FastifyReply)=>{
   res.send('Server has been successfully launched!')
 })

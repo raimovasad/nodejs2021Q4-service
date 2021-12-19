@@ -42,7 +42,7 @@ type addReq = FastifyRequest<{
 /**
  * This funtion sends all tasks
  * 
- * @param req - getAllReq request
+ * @param req - fastify request
  * @param res - fastify reply
  */
 
@@ -108,8 +108,8 @@ async function getTaskById(req:getByIdReq,res: FastifyReply): Promise<void>{
  * This function updates the task by id and sends it to client
  * 
  * 
- * @param req 
- * @param res 
+ * @param req - fastify request
+ * @param res - fastify reply
  */
 
 async function updateTask(req: updateTaskReq,res: FastifyReply){
@@ -185,8 +185,8 @@ async function addTask(req: addReq,res: FastifyReply) {
  * This function removes the task by id
  * 
  * 
- * @param req 
- * @param res 
+ * @param req - fastify request
+ * @param res - fastify reply
  */
 
 async function removeTask(req:getByIdReq,res: FastifyReply) { 

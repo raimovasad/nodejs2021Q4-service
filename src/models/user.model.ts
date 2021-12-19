@@ -42,8 +42,7 @@ public password: string;
    * Returns the user params as an object.
    *
    *
-   * @returns The user object that is going to be save
-   *
+   * @returns The user object that is going to be saved
    */
 
   toSaveUser():IUser{
@@ -55,7 +54,7 @@ public password: string;
     }
   }
 
-    /**
+  /**
    * Saves a new user in database.
    *
    *  
@@ -79,7 +78,7 @@ public password: string;
    * @param id - The id of the user  
    * @param user - The object of the user  
    * @returns The new user object that is saved
-   * @throws An Error id the user with that id doesn't exist
+   * @throws Error id the user with that id doesn't exist or there is no access to database
    */
 
   static update(id: string,user: IUserNoId){
@@ -128,7 +127,7 @@ public password: string;
    *
    * @param id - The id of the user  
    * @returns The user object
-   * @throws An Error if the user with that id doesn't exist
+   * @throws Error if the user with that id doesn't exist
    */
 
   static getById(id: string){
@@ -146,7 +145,7 @@ public password: string;
    *
    *
    * @param id - The id of the user  
-   * @throws An Error if the user with that id doesn't exist
+   * @throws Error if the user with that id doesn't exist
    */
 
   static remove(id: string){
