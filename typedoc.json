@@ -1,4 +1,4 @@
 {
     "entryPoints": ["src/app.js"],
-    "out": "docs"
+    "out": "./src/docs"
 }
