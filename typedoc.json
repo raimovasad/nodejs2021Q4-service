@@ -1,0 +1,4 @@
+{
+    "entryPoints": ["src/app.js"],
+    "out": "docs"
+}

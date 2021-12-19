@@ -5,12 +5,26 @@ import boardRouter from './routers/boards.router';
 import taskRouter from './routers/task.router';
 
 
+
+/**
+ * Invokes main fastify instaqnce
+ * 
+ * 
+ * @param logger - fastify server options
+ */
+
 const fastify = FastifyMain({
   logger:{ 
     prettyPrint:true
   }
 })
 
+/**
+ * Adds a new middleware or functions and their options
+ * 
+ * @param FastifySwagger - plugin
+ * @param options - plugin options
+ */
 
 fastify.register(FastifySwagger,{
   exposeRoute: true,
@@ -23,10 +37,41 @@ fastify.register(FastifySwagger,{
   }
 })
 
+
+/**
+ * Adds userRouter 
+ * 
+ * 
+ * @param userRouter - user router
+ */
+
 fastify.register(userRouter)
+
+/**
+ * Adds boardRouter 
+ * 
+ * 
+ * @param boardRouter - board router
+ */
+
 fastify.register(boardRouter)
+
+/**
+ * Adds taskRouter 
+ * 
+ * 
+ * @param taskRouter - task router
+ */
+
 fastify.register(taskRouter)
 
+/**
+ * Send the message about success
+ * 
+ * @param path - required path to the server
+ * @param handler - function that should work when path is called
+ * 
+ */
 fastify.get('/',(req: FastifyRequest,res: FastifyReply)=>{
   res.send('Server has been successfully launched!')
 })

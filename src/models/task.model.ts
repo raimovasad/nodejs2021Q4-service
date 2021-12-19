@@ -71,6 +71,13 @@ class Task {
     }
   }
 
+  /**
+   * Saves the task in the database
+   * 
+   * @returns Just saved task
+   * @throws Throws new Error if cannot access to database
+   */
+
   save(): ITask{
     const tasksDB: Array<ITask> = tasks || undefined
     if(!tasksDB){
@@ -124,7 +131,7 @@ class Task {
    * @returns All tasks in database
    */
 
-  static getAll(){
+  static getAll(): ITask[]{
       return tasks;
     // const boardTasks = tasks.filter(c=> c.boardId === boardId.toString());
     // return boardTasks;
@@ -136,10 +143,10 @@ class Task {
    *
    * @param id - The id of the user  
    * @returns The user object
-   * @throws An Error if the user with that id doesn't exist
+   * @throws Throws new Error if the user with that id doesn't exist
    */
 
-  static getById(id: string): ITask | never{
+  static getById(id: string): ITask{
     const tasksDB = tasks
     const task = tasksDB.find(c => c.id === id)
     if(!task){
@@ -153,11 +160,11 @@ class Task {
    *
    *
    * @param id - The id of the task  
-   * @throws An Error if the task with that id doesn't exist
+   * @throws Throws new Error if the task with that id doesn't exist
    */
 
 
-  static remove(id: string): ITask[]{
+  static remove(id: string):void{
     const index = tasks.findIndex( c=> c.id === id)
     if(index === -1){
       throw Error(`Task with id ${id} doesn't exist!`)
@@ -165,8 +172,6 @@ class Task {
     else{
       tasks.splice(index,1)
     }
-    return tasks;
-
   }
 
   /**

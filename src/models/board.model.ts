@@ -34,7 +34,12 @@ class Board {
     this.columns = columns;
   }
 
-  
+  /**
+   * Returns board object
+   * 
+   * 
+   * @returns board - object with fields `id`, `title`, `columns`
+   */
 
   toSaveBoard(){
     return {
@@ -43,6 +48,12 @@ class Board {
       columns: this.parseColumns()
     }
   }
+
+  /**
+   * Returns new columns with id generated
+   * 
+   * @returns cols - parsed columns with the new field `id` using uuid
+   */
 
    parseColumns(){
     const cols = this.columns.map((col:IColumn) => {
@@ -53,6 +64,13 @@ class Board {
      return cols;
   }
 
+  /**
+   * Saves new board and returns it
+   * 
+   * @returns board - newly saved board object
+   * @throws Error - Throws new Error if cannot access to database 
+   */
+
    save(){
     if(!boards){
       throw new Error('Internal server error!')
@@ -61,9 +79,18 @@ class Board {
     return boards[boards.length-1];
   } 
 
+  /**
+   * Updates the board and returns it
+   * 
+   * @param id - The `id` of the board
+   * @param board - Body of the board `title`, `columns`
+   * @returns board - Just updated board
+   * @throws Error - Throws new Error if there is no board with that `id` or cannot access to database
+   */
+
   static update(id: string,board: IBoard){
-    const usersDB = boards || undefined
-    if(!usersDB){
+    const boardsDB = boards || undefined
+    if(!boardsDB){
       throw new Error('Internal server error!')
     }
     const index = boards.findIndex( c=> c.id === id)
@@ -80,28 +107,49 @@ class Board {
   }
  
 
+  /**
+   * Returns all boards in the database
+   * 
+   * @returns boards - All the boards in database
+   */
 
-  static getAll(){
+  static getAll(): IBoard[]{
     return boards
   }
 
+  /**
+   * Returns the board with same id
+   * 
+   * @param id - The `id` of the board
+   * @returns The board with the same `id`
+   * @throws Throws new Error if there is no board with such id
+   */
 
-
-  static getById(id:  string){
+  static getById(id:  string):IBoard{
     const boardsDB = boards
     const board = boardsDB.find((c:IBoard) => c.id === id)
-    return board;
+    if(!board){
+      throw new Error(`There is no board with such id = ${id}`)
+    }
+    else{
+      return board;
+    }
   }
 
-  static remove(id: string){
+  /**
+   * Removes the board from database
+   * 
+   * @param id - The `id` of the board
+   * @throws Throws new Error if there is no board with such id
+   */
+
+  static remove(id: string): void{
     const index = boards.findIndex( (c: IBoard) => c.id === id)
     if(index === -1){
       throw Error(`Board with id ${id} doesn't exist!`)
     }
     else{
         boards.splice(index,1)
-        return boards;
-
     }
 
   }

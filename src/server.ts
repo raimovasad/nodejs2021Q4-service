@@ -6,7 +6,14 @@ import Config from './common/config';
 const {PORT} = Config
 
 
-const start = async()=>{
+/**
+ * Starts server working
+ * 
+ * 
+ * 
+ */
+
+const start = async():Promise<void>=>{
   try{
     await server.listen(PORT)
   }catch(error){

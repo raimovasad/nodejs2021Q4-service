@@ -1,17 +1,24 @@
-import { FastifyInstance, FastifyPluginAsync } from 'fastify';
+import { FastifyInstance } from 'fastify';
 import fp from 'fastify-plugin'
 import usersService from '../controllers/user.service';
 
 
-const userRoute: FastifyPluginAsync = async  (fastify: FastifyInstance )=>{
+/**
+ * Collects all the user routes
+ * 
+ * @param fastify - the instace of the server
+ * 
+ */
 
-  fastify.get('/users',usersService.getAllUsers);
+async function userRoute(fastify: FastifyInstance) {
 
-  fastify.get('/users/:id',usersService.getUsersById);
+  fastify.get('/users', usersService.getAllUsers);
 
-  fastify.post('/users',usersService.addUser)
-  fastify.put('/users/:id',usersService.updateUser)
-  fastify.delete('/users/:id',usersService.removeUser)
+  fastify.get('/users/:id', usersService.getUsersById);
+
+  fastify.post('/users', usersService.addUser);
+  fastify.put('/users/:id', usersService.updateUser);
+  fastify.delete('/users/:id', usersService.removeUser);
 
 
 }

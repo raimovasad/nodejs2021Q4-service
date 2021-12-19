@@ -26,45 +26,42 @@ interface Iuser {
 
 
 /**
- * getAllUsers
- * This function gets ```All``` users and sends it to client
+ * This function gets All users and sends it to client
  * 
  * 
- * @param req 
- * @param res 
+ * @param req - fastify request
+ * @param res - fastify reply
  */
 
-async function getAllUsers(req: FastifyRequest,res: FastifyReply){
+async function getAllUsers(req: FastifyRequest,res: FastifyReply): Promise<void>{
     const users: Array<Iuser> = User.getAll()
 
     res.send(users.map(user => User.toResponse(user)))
 };
 
 /**
- * getUsersById
  * This function gets the user by id and sends it to client
  * 
  * 
- * @param req 
- * @param res 
+ * @param req - fastify request
+ * @param res - fastify reply
  */
 
-async function getUsersById(req: getUserByIdReq,res: FastifyReply){
+async function getUsersById(req: getUserByIdReq,res: FastifyReply): Promise<void>{
     const {id} = req.params;
     const user = User.getById(id);
     res.send(User.toResponse(user));
 };
 
 /**
- * updateUser
  * This function updates the user by id and sends it to client
  * 
  * 
- * @param req 
- * @param res 
+ * @param req - fastify request
+ * @param res - fastify reply
  */
 
-async function updateUser(req: updateUserReq,res: FastifyReply){
+async function updateUser(req: updateUserReq,res: FastifyReply): Promise<void>{
     const {id} = req.params;
     const {name,login,password} = req.body;
     const user = {
@@ -77,15 +74,14 @@ async function updateUser(req: updateUserReq,res: FastifyReply){
 };
 
 /**
- * addUser
  * This function adds new user and sends it to client
  * 
  * 
- * @param req 
- * @param res 
+ * @param req - fastify request
+ * @param res - fastify reply
  */
 
-async function addUser(req: addUserReq ,res: FastifyReply) { 
+async function addUser(req: addUserReq ,res: FastifyReply): Promise<void> { 
     const {name,login,password} = req.body
     if(!name || !login || !password){
         res.send({message:'Not entered the required field!'});
@@ -106,14 +102,13 @@ async function addUser(req: addUserReq ,res: FastifyReply) {
 
  
 /**
- * removeUser
  * This function removes the user by id
  * 
- * @param req 
- * @param res 
+ * @param req - getUserByIdReq request
+ * @param res - fastify reply
  */
 
- async function removeUser(req: getUserByIdReq,res: FastifyReply) { 
+ async function removeUser(req: getUserByIdReq,res: FastifyReply): Promise<void> { 
     const {id} = req.params;
     try{
         User.remove(id);

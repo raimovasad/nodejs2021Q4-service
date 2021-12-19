@@ -39,6 +39,13 @@ type addReq = FastifyRequest<{
 }>
 
 
+/**
+ * This funtion sends all tasks
+ * 
+ * @param req - getAllReq request
+ * @param res - fastify reply
+ */
+
 async function getAllTasks(req: getAllReq,res: FastifyReply){
     const {boardId} = req.params;
     const validId = validate(boardId);
@@ -54,12 +61,11 @@ async function getAllTasks(req: getAllReq,res: FastifyReply){
 };
 
 /**
- * getTaskById
  * This function get the task by id and sends it to client
  * 
  * 
- * @param req 
- * @param res 
+ * @param req - fastify request
+ * @param res - fastify reply
  */
 
 
@@ -99,7 +105,6 @@ async function getTaskById(req:getByIdReq,res: FastifyReply): Promise<void>{
 };
 
 /**
- * getTaskById
  * This function updates the task by id and sends it to client
  * 
  * 
@@ -145,12 +150,11 @@ async function updateTask(req: updateTaskReq,res: FastifyReply){
 
 
 /**
- * getTaskById
  * This function adds new task and sends it to client
  * 
  * 
- * @param req 
- * @param res 
+ * @param req - fastify request
+ * @param res - fastify reply
  */
 
 async function addTask(req: addReq,res: FastifyReply) { 
@@ -178,7 +182,6 @@ async function addTask(req: addReq,res: FastifyReply) {
 
 
  /**
- * getTaskById
  * This function removes the task by id
  * 
  * 

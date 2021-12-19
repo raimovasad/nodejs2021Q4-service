@@ -68,6 +68,7 @@ async function getBoardById(req: CustomGetByIdReq,res: FastifyReply): Promise<vo
  * @param req - fastify request 
  * @param res - fastify response
  */
+
 async function updateBoard(req: CustomUpdateReq,res: FastifyReply): Promise<void>{
     const {id} = req.params;
     const {title,columns} = req.body;
@@ -81,10 +82,10 @@ async function updateBoard(req: CustomUpdateReq,res: FastifyReply): Promise<void
 };
 
 /**
- * This function adds new board and send the updated board to the client
+ * This function adds new board and send the board to the client
  * 
  * 
- * @param req - fastify request 
+ * @param req - CustomAddReq request 
  * @param res - fastify response
  */
 
@@ -105,7 +106,7 @@ async function addBoard(req: CustomAddReq,res: FastifyReply): Promise<void> {
  * This function removes board by id 
  * 
  * 
- * @param req - fastify request 
+ * @param req - CustomGetByIdReq request 
  * @param res - fastify response
  */
 
