@@ -3,6 +3,7 @@ import FastifySwagger from 'fastify-swagger';
 import userRouter from './routers/user.router';
 import boardRouter from './routers/boards.router';
 import taskRouter from './routers/task.router';
+import logger from "./tools/logger";
 
 
 
@@ -13,11 +14,7 @@ import taskRouter from './routers/task.router';
  * @param logger - fastify server options
  */
 
-const fastify = FastifyMain({
-  logger:{ 
-    prettyPrint:true
-  }
-})
+const fastify = FastifyMain({logger})
 
 /**
  * Adds a new middleware or functions and their options

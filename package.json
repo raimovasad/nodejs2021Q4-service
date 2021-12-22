@@ -10,7 +10,8 @@
   "main": "dist/server.js",
   "scripts": {
     "build": "tsc",
-    "start": "tsc && nodemon --experimental-modules --es-module-specifier-resolution=node dist/server.js",
+    "dev": "ts-node src/server.ts",
+    "start": "tsc && node --experimental-modules --es-module-specifier-resolution=node dist/server.js",
     "lint": "eslint --ext .js,.ts --fix src/",
     "test": "cross-env DEBUG=rs:* jest --testMatch \"<rootDir>/test/e2e/test/*.test.js\" --noStackTrace --runInBand",
     "test:auth": "cross-env DEBUG=rs:* TEST_MODE=auth jest --noStackTrace"
@@ -53,8 +54,10 @@
     "fastify": "^3.24.1",
     "fastify-plugin": "^3.0.0",
     "fastify-swagger": "^4.12.6",
+    "pino": "^7.6.0",
     "pino-pretty": "^7.3.0",
     "swagger-ui-express": "4.1.6",
+    "ts-node": "^10.4.0",
     "uuid": "8.3.2",
     "yamljs": "0.3.0"
   },
