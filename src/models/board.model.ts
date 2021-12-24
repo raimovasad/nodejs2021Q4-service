@@ -1,4 +1,5 @@
 import {v4 as uuidM} from "uuid"
+import createHttpError from 'http-errors';
 
 
 interface IBoard {
@@ -73,7 +74,7 @@ class Board {
 
    save(){
     if(!boards){
-      throw new Error('Internal server error!')
+     return createHttpError(500,'Cannot access to database!')
     }
     boards.push(this.toSaveBoard())
     return boards[boards.length-1];
@@ -91,11 +92,11 @@ class Board {
   static update(id: string,board: IBoard){
     const boardsDB = boards || undefined
     if(!boardsDB){
-      throw new Error('Internal server error!')
+      throw new createHttpError.InternalServerError('Cannot access to database!')
     }
     const index = boards.findIndex( c=> c.id === id)
     if(index === -1){
-      throw new Error(`Board with id ${id} doesn't exist!`)
+     throw new createHttpError.NotFound(`Board with id ${id} doesn't exist!`)
     }
     const newBoard: IBoard = {id:'',title:'',columns:[{id:'',title:'',order:0}]}
     newBoard.id =  id;
@@ -129,7 +130,7 @@ class Board {
     const boardsDB = boards
     const board = boardsDB.find((c:IBoard) => c.id === id)
     if(!board){
-      throw new Error(`There is no board with such id = ${id}`)
+      throw new createHttpError.NotFound(`There is no board with such id = ${id}`)
     }
     else{
       return board;
@@ -146,7 +147,7 @@ class Board {
   static remove(id: string): void{
     const index = boards.findIndex( (c: IBoard) => c.id === id)
     if(index === -1){
-      throw Error(`Board with id ${id} doesn't exist!`)
+      throw new createHttpError.NotFound(`Board with id ${id} doesn't exist!`)
     }
     else{
         boards.splice(index,1)

@@ -74,22 +74,9 @@ async function getTaskById(req:getByIdReq,res: FastifyReply): Promise<void>{
     // const validId = uuidTask.validate(boardId);
     // const validTaskId = uuidTask.validate(id);
     // if(validId && validTaskId){
-        try{
-            const task = TaskMain.getById(id);
-            if(task){
-                res.send(task);
-            }
-            else{
-                res.statusCode = 404;
-                res.send('No such task!')
-            }
-    
-        }catch(error: unknown){
-            if( error instanceof Error){
-                res.statusCode = 404;
-                res.send(`${error.message}`)
-            }
-        }
+        const task = TaskMain.getById(id);
+        res.send(task);
+       
     // }
     // else{
     //     res.statusCode = 400;
@@ -127,14 +114,9 @@ async function updateTask(req: updateTaskReq,res: FastifyReply){
             boardId,
             columnId,
          };
-         try{
-            const updated = TaskMain.update(id,task)
-              res.send(updated);
-         }catch(error: unknown){
-             if( error instanceof Error){
-                res.send(`${error.message}`)
-             }
-         }
+        const updated = TaskMain.update(id,task)
+        res.send(updated);
+        
     // }
     // else{
     //     res.statusCode = 400;
@@ -169,14 +151,10 @@ async function addTask(req: addReq,res: FastifyReply) {
                 boardId: boardIdReq,
                 columnId,
             })
-            try{
                const newTask = task.save()
                res.statusCode = 201
                res.send(newTask)
-            }
-            catch(err){
-                res.send({message: `${String(err)}`})
-            } 
+            
    
  }
 
@@ -200,7 +178,6 @@ async function removeTask(req:getByIdReq,res: FastifyReply) {
         //     res.statusCode = 404
         //      res.send('Invalid boardId!')
         // }else{
-            try{
                 const task = TaskMain.getById(id)
                 if(!task){
                     res.statusCode = 404
@@ -209,9 +186,7 @@ async function removeTask(req:getByIdReq,res: FastifyReply) {
                 TaskMain.remove(id)
                 res.statusCode =204
                 res.send()
-            }catch(err){
-                 res.send(`${err}`)
-            }
+            
         // }
         
     // }

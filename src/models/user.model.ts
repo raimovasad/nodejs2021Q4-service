@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid';
-
+import createHttpError from 'http-errors';
 
 interface IUser {
   id: string;
@@ -65,7 +65,7 @@ public password: string;
   save(){
     const usersDB = users || undefined
     if(!usersDB){
-      throw new Error('Internal server error!')
+      throw new createHttpError.InternalServerError('Cannot access to database!')
     }
     users.push(this.toSaveUser())
     return this.toSaveUser();
@@ -84,11 +84,11 @@ public password: string;
   static update(id: string,user: IUserNoId){
     const usersDB = users || undefined
     if(!usersDB){
-      throw new Error('Internal server error!')
+      throw new createHttpError.InternalServerError('Cannot access to database!')
     }
     const index = users.findIndex( (c: IUser)=> c.id === id)
     if(index === -1){
-      throw new Error(`User with id ${id} doesn't exist!`)
+      throw new createHttpError.NotFound(`User with id ${id} doesn't exist!`)
     }
     users[index] = {
       id,
@@ -134,7 +134,7 @@ public password: string;
     const usersDB = users
     const user = usersDB.find(c => c.id.toString() === id.toString())
     if(!user){
-      throw new Error(`User with id ${id} doesn't exist!`)
+      throw new createHttpError.NotFound(`User with id ${id} doesn't exist!`)
     }else{
       return user;
     }
@@ -151,7 +151,7 @@ public password: string;
   static remove(id: string){
     const index = users.findIndex( c=> c.id === id)
     if(index === -1){
-      throw Error(`User with id ${id} doesn't exist!`)
+      throw new createHttpError.NotFound(`User with id ${id} doesn't exist!`)
     }
     else{
      users.splice(index,1)

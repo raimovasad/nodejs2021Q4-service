@@ -1,6 +1,7 @@
+import pino from 'pino';
 import server from './app';
-
 import Config from './common/config';
+import logger from './tools/logger';
 
 
 const {PORT} = Config
@@ -14,12 +15,15 @@ const {PORT} = Config
  */
 
 const start = async():Promise<void>=>{
-  try{
     await server.listen(PORT)
-  }catch(error){
-    server.log.error(error);
-    process.exit(1);
-  }
+  
 }
 
 start()
+logger.info('Hello motherfuckers!!')
+
+
+process.on('uncaughtException', pino.final(logger, (err) => {
+  logger.error(err.message, 'uncaughtException')
+  process.exit(1)
+}))

@@ -1,5 +1,7 @@
 import FastifyMain,{ FastifyReply, FastifyRequest } from "fastify";
 import FastifySwagger from 'fastify-swagger';
+import fastifySensible from "fastify-sensible";
+import { isHttpError } from "http-errors";
 import userRouter from './routers/user.router';
 import boardRouter from './routers/boards.router';
 import taskRouter from './routers/task.router';
@@ -41,6 +43,16 @@ fastify.register(FastifySwagger,{
  * 
  * @param userRouter - user router
  */
+fastify
+  .register(fastifySensible)
+  .after(() => {
+    fastify.setErrorHandler( (error, request, reply)=>{
+      if(isHttpError(error)){
+        reply.send(error)
+        logger.error(error)
+      }
+    })
+  })
 
 fastify.register(userRouter)
 

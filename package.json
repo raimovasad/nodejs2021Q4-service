@@ -53,7 +53,9 @@
     "express": "4.17.1",
     "fastify": "^3.24.1",
     "fastify-plugin": "^3.0.0",
+    "fastify-sensible": "^3.1.2",
     "fastify-swagger": "^4.12.6",
+    "http-errors": "^2.0.0",
     "pino": "^7.6.0",
     "pino-pretty": "^7.3.0",
     "swagger-ui-express": "4.1.6",
@@ -62,6 +64,7 @@
     "yamljs": "0.3.0"
   },
   "devDependencies": {
+    "@types/http-errors": "^1.8.1",
     "@types/node": "^16.11.12",
     "@types/uuid": "^8.3.3",
     "@typescript-eslint/eslint-plugin": "^5.6.0",

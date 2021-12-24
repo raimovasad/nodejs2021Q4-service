@@ -49,15 +49,15 @@ async function getAllBoards(req: FastifyRequest,res: FastifyReply): Promise<void
 
 async function getBoardById(req: CustomGetByIdReq,res: FastifyReply): Promise<void>{
     const {id} = req.params;
-    try{
+    // try{
     const board = BoardModel.getById(id);
     res.send(board);
-    }catch(e){
-       if(e instanceof Error){
-        res.statusCode = 404
-        res.send(`${e.message}`)
-       }
-    }
+    // }catch(e){
+    //    if(e instanceof Error){
+    //     res.statusCode = 404
+    //     res.send(`${e.message}`)
+    //    }
+    // }
     
     
        
@@ -115,15 +115,12 @@ async function addBoard(req: CustomAddReq,res: FastifyReply): Promise<void> {
 
 async function removeBoard(req: CustomGetByIdReq,res: FastifyReply): Promise<void> { 
     const {id} = req.params;
-    try{
         BoardModel.remove(id)
          TaskModel.removeByBoard(id)
 
         res.statusCode =204
         res.send()
-    }catch(err){
-        res.send(`${err}`)
-    }
+    
   }
 
 export default {

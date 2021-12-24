@@ -1,5 +1,5 @@
 import { v4 as uuidV4 } from 'uuid';
-
+import createHttpError from 'http-errors';
 
 
 
@@ -81,7 +81,7 @@ class Task {
   save(): ITask{
     const tasksDB: Array<ITask> = tasks || undefined
     if(!tasksDB){
-      throw new Error('Internal server error!')
+      throw new createHttpError.InternalServerError('Cannot access to database!')
     }
     tasks.push(this.toSaveTask())
     return tasks[tasks.length-1];
@@ -100,7 +100,7 @@ class Task {
   static update(id: string,task:ITask): ITask{
     const tasksDB = tasks || undefined
     if(!tasksDB){
-      throw new Error('Internal server error!')
+      throw new createHttpError.InternalServerError('Cannot access to database!')
     }
     // const validBoard = boards.find(c=> c.id.toString() === boardId.toString())
     // if(validBoard){
@@ -150,7 +150,7 @@ class Task {
     const tasksDB = tasks
     const task = tasksDB.find(c => c.id === id)
     if(!task){
-      throw new Error(`There is no such task with the id ${id}`)
+      throw new createHttpError.NotFound(`There is no such task with the id ${id}`)
     }
       return task;
   }
@@ -167,7 +167,7 @@ class Task {
   static remove(id: string):void{
     const index = tasks.findIndex( c=> c.id === id)
     if(index === -1){
-      throw Error(`Task with id ${id} doesn't exist!`)
+      throw new createHttpError.NotFound(`Task with id ${id} doesn't exist!`)
     }
     else{
       tasks.splice(index,1)

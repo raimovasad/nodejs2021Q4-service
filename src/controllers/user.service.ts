@@ -88,14 +88,10 @@ async function addUser(req: addUserReq ,res: FastifyReply): Promise<void> {
     }
     else{
         const user = new User({name,login,password})
-        try{
             const newUser = user.save()
             res.statusCode =201;
             res.send(User.toResponse(newUser))
-        }
-        catch(err){
-            res.send({message: `${String(err)}`})
-        }
+        
     }
  }
 
@@ -110,15 +106,11 @@ async function addUser(req: addUserReq ,res: FastifyReply): Promise<void> {
 
  async function removeUser(req: getUserByIdReq,res: FastifyReply): Promise<void> { 
     const {id} = req.params;
-    try{
         User.remove(id);
         Task.removeUserId(id);
         res.statusCode = 204;
         res.send();
-    }catch(err){
-        res.statusCode = 404
-        res.send(`${err}`);
-    }
+    
   }
 
 export default {
