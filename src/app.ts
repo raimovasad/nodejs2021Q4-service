@@ -1,11 +1,15 @@
-import FastifyMain,{ FastifyReply, FastifyRequest } from "fastify";
+import FastifyMain,{ FastifyReply, FastifyRequest,FastifyInstance } from "fastify";
 import FastifySwagger from 'fastify-swagger';
 import fastifySensible from "fastify-sensible";
 import { isHttpError } from "http-errors";
+import fp from "fastify-plugin";
 import userRouter from './routers/user.router';
 import boardRouter from './routers/boards.router';
 import taskRouter from './routers/task.router';
-import logger from "./tools/logger";
+import LOG from "./tools/logger";
+
+
+const {logger} = LOG
 
 
 
@@ -43,16 +47,16 @@ fastify.register(FastifySwagger,{
  * 
  * @param userRouter - user router
  */
-fastify
-  .register(fastifySensible)
-  .after(() => {
-    fastify.setErrorHandler( (error, request, reply)=>{
-      if(isHttpError(error)){
-        reply.send(error)
-        logger.error(error)
+
+
+  fastify. register(fp(async(Fastify: FastifyInstance)=>{
+    Fastify.addHook('onRequest',(req,res,done)=>{
+      if(req.params){
+        logger.info({req_url:req.url, query_params: req.query})
       }
+      done()
     })
-  })
+  }))
 
 fastify.register(userRouter)
 
@@ -85,17 +89,22 @@ fastify.register(taskRouter)
 fastify.get('/',(req: FastifyRequest,res: FastifyReply)=>{
   res.send('Server has been successfully launched!')
 })
+
+// Central error handling for routes
+
+fastify
+  .register(fastifySensible)
+  .after(() => {
+    fastify.setErrorHandler( (error, request, reply)=>{
+      if(isHttpError(error)){
+        reply.send(error.message)
+        logger.error(error.message)
+      }
+    })
+  })
  
 
 
 export default fastify;
 
 
-// const swaggerUI = require('swagger-ui-express');
-// const path = require('path');
-// const YAML = require('yamljs');
-
-// const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
-
-
-// app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
