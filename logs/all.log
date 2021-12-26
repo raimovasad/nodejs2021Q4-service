@@ -217,3 +217,4 @@
 {"level":30,"time":1640539039702,"pid":13504,"hostname":"DESKTOP-2OBBCT7","req_url":"/boards/gdfg/dgdfg","query_params":{}}
 {"level":30,"time":1640539039702,"pid":13504,"hostname":"DESKTOP-2OBBCT7","reqId":"req-1","msg":"Route GET:/boards/gdfg/dgdfg not found"}
 {"level":30,"time":1640539039707,"pid":13504,"hostname":"DESKTOP-2OBBCT7","reqId":"req-1","res":{"statusCode":404},"responseTime":4.850199997425079,"msg":"request completed"}
+{"level":30,"time":1640539830040,"pid":5460,"hostname":"DESKTOP-2OBBCT7","msg":"Server listening at http://127.0.0.1:4000"}

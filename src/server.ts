@@ -20,14 +20,16 @@ const start = async():Promise<void>=>{
 start()
 
 
-process.on('uncaughtException',(err => {
- logger.fatal(err.message, ' uncaughtException ')
+const newLocal2 = 'uncaughtException';
+process.on(newLocal2,(err => {
+ logger.fatal(err.message, newLocal2)
 //  transport.on('ready',()=>{
    process.exit(1)
 //  })
 }))
 
-process.on('unhandledRejection',(event: Error)=>{
-  logger.fatal(event.message, ' uncaughtException ')
+const newLocal = 'unhandledRejection';
+process.on(newLocal,(event: Error)=>{
+  logger.fatal(event.message, newLocal)
   process.exit(1)
 })
