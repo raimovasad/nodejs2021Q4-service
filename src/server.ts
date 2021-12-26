@@ -26,3 +26,8 @@ process.on('uncaughtException',(err => {
    process.exit(1)
 //  })
 }))
+
+process.on('unhandledRejection',(event: Error)=>{
+  logger.fatal(event.message, ' uncaughtException ')
+  process.exit(1)
+})
