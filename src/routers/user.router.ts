@@ -16,6 +16,7 @@ async function userRoute(fastify: FastifyInstance) {
   fastify.post('/users', usersService.addUser);
   fastify.put('/users/:id', usersService.updateUser);
   fastify.delete('/users/:id', usersService.removeUser);
+  
 }
 
 
