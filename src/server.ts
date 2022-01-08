@@ -14,7 +14,7 @@ const {logger} = Pino;
  */
 
 const start = async():Promise<void>=>{
-    await server.listen(PORT)
+    await server.listen(PORT,'0.0.0.0')
 }
 
 start()

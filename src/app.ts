@@ -54,6 +54,9 @@ fastify.register(FastifySwagger,{
       if(req.params){
         logger.info({req_url:req.url, query_params: req.query})
       }
+      if(req.body){
+        logger.info({req_body:req.body})
+      }
       done()
     })
   }))
