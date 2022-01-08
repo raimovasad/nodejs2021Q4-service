@@ -1,11 +1,15 @@
-FROM node:16.13.1
+FROM node:16-alpine
 
-WORKDIR /code
+ARG PORT
 
-ENV PORT 4000
+EXPOSE ${PORT}
 
-RUN npm install && tsc
+WORKDIR /usr/app/src
 
-COPY . /code
+COPY package.json package-lock.json ./
 
-CMD ["node", "--experimental-modules --es-module-specifier-resolution=node dist/server.js"]
+RUN npm install --no-optional 
+
+COPY . .
+
+CMD ["npm", "start"]
