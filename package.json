@@ -7,9 +7,9 @@
   },
   "type": "commonjs",
   "description": "REST service starter for RS School",
-  "main": "src/server.js",
+  "main": "dist/server.js",
   "scripts": {
-    "start": "nodemon src/server.js",
+    "start": "nodemon src/server.ts",
     "lint": "eslint --ext .js,.ts --fix src/",
     "test": "cross-env DEBUG=rs:* jest --testMatch \"<rootDir>/test/e2e/test/*.test.js\" --noStackTrace --runInBand",
     "test:auth": "cross-env DEBUG=rs:* TEST_MODE=auth jest --noStackTrace"
@@ -33,39 +33,47 @@
       "./test/setup.js"
     ]
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
+  
   "lint-staged": {
     "src/**/*.js": [
       "npm run lint"
     ]
   },
   "dependencies": {
+    "@bundled-es-modules/uuid": "^3.3.2",
     "cross-env": "7.0.3",
     "dotenv": "10.0.0",
-    "express": "4.17.1",
-    "swagger-ui-express": "4.1.6",
-    "uuid": "8.3.2",
-    "yamljs": "0.3.0"
+    "eslint-plugin-tsdoc": "^0.2.14",
+    "fastify": "^3.24.1",
+    "fastify-plugin": "^3.0.0",
+    "fastify-sensible": "^3.1.2",
+    "http-errors": "^2.0.0",
+    "pino": "^7.6.0",
+    "pino-pretty": "^7.3.0",
+    "ts-node": "^10.4.0",
+    "uuid": "8.3.2"
   },
   "devDependencies": {
+    "@types/http-errors": "^1.8.1",
+    "@types/node": "^16.11.12",
+    "@types/uuid": "^8.3.3",
+    "@typescript-eslint/eslint-plugin": "^5.6.0",
+    "@typescript-eslint/parser": "^5.6.0",
     "chai": "4.3.4",
     "debug": "4.3.2",
     "dirty-chai": "2.0.1",
-    "eslint": "8.2.0",
+    "eslint": "^8.2.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-import": "2.25.3",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-prettier": "4.0.0",
-    "husky": "^4.3.8",
+    "fastify-tsconfig": "^1.0.1",
     "jest": "27.3.1",
     "lint-staged": "12.0.3",
     "nodemon": "2.0.15",
     "prettier": "2.4.1",
-    "supertest": "6.1.6"
+    "supertest": "6.1.6",
+    "typescript": "^4.5.2"
   }
 }
