@@ -4,7 +4,7 @@ ARG PORT
 
 EXPOSE ${PORT}
 
-WORKDIR /usr/app/src
+WORKDIR /app/src
 
 COPY package.json package-lock.json ./
 
