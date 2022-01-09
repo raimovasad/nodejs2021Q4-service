@@ -1,5 +1,4 @@
 import FastifyMain,{ FastifyReply, FastifyRequest,FastifyInstance } from "fastify";
-import FastifySwagger from 'fastify-swagger';
 import fastifySensible from "fastify-sensible";
 import { isHttpError } from "http-errors";
 import fp from "fastify-plugin";
@@ -22,23 +21,7 @@ const {logger} = LOG
 
 const fastify = FastifyMain({logger})
 
-/**
- * Adds a new middleware or functions and their options
- * 
- * @param FastifySwagger - plugin
- * @param options - plugin options
- */
 
-fastify.register(FastifySwagger,{
-  exposeRoute: true,
-  routePrefix: '/rest-docs',
-  swagger:{
-    info: {
-      title: 'fastify-api',
-    description:'REST service with the Fastify',
-    version:'0.1.0'},
-  }
-})
 
 
 /**

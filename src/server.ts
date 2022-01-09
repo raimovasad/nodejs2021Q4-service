@@ -12,13 +12,10 @@ const {logger} = Pino;
  * 
  * 
  */
-
 const start = async():Promise<void>=>{
     await server.listen(PORT,'0.0.0.0')
 }
-
 start()
-
 
 const newLocal2 = 'uncaughtException';
 process.on(newLocal2,(err => {
