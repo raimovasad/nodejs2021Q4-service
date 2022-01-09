@@ -3,7 +3,7 @@ version: '3.0'
 services:
   fastify-api:
       image: "unique-http:rest-api" 
-      container_name: fastify-rest-app 
+      container_name: unique-http 
       build: .
       ports:
          - "${PORT}:${PORT}" 
@@ -11,8 +11,8 @@ services:
         PORT: "${PORT}"
       networks:
         - my-net
-     # volumes:
-      #  - logs: /app/logs
+      volumes:
+        - ./logs:/app/logs/
       restart: on-failure
       depends_on:
        - postgresql
@@ -23,12 +23,12 @@ services:
 
   postgresql:
       image: "postgres-db:db-rest"
-      container_name: postgres-database
+      container_name: "postgres-db"
       build: ./database/
       ports:
         - "${DB_PORT}:${DB_PORT}" 
-     # volumes:
-      #  - database: "/var/lig/postgresql/data"
+      volumes:
+        - ./database:/var/lib/postgresql/data
       networks:
         - my-net
       environment:
@@ -40,3 +40,6 @@ services:
 networks:
    my-net:
       driver: bridge
+volumes:
+    logs:
+    database:
