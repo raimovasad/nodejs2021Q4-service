@@ -12,7 +12,7 @@ services:
       networks:
         - my-net
       volumes:
-        - ./logs:/app/logs/
+        - logs:/app/logs/
       restart: on-failure
       depends_on:
        - postgresql
@@ -28,14 +28,13 @@ services:
       ports:
         - "${DB_PORT}:${DB_PORT}" 
       volumes:
-        - ./database:/var/lib/postgresql/data
+        - database:/var/lib/postgresql/data
       networks:
         - my-net
       environment:
-        DB_USER: ${DB_USER}
-        DB_PASS: ${DB_PASS}
-        DB_DATA: ${DB_USER}
-        DB_ADD: ${DB_ADD}
+       - POSTGRES_USER:${POSTGRES_USER}
+       - POSTGRES_PASSWORD:${POSTGRES_PASSWORD}
+       - POSTGRES_DB:${POSTGRES_DB}
 
 networks:
    my-net:
