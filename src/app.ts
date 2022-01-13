@@ -2,6 +2,7 @@ import FastifyMain,{ FastifyReply, FastifyRequest,FastifyInstance } from "fastif
 import fastifySensible from "fastify-sensible";
 import { isHttpError } from "http-errors";
 import fp from "fastify-plugin";
+import main from "./loader/db-connect"
 import userRouter from './routers/user.router';
 import boardRouter from './routers/boards.router';
 import taskRouter from './routers/task.router';
@@ -21,6 +22,11 @@ const {logger} = LOG
 
 const fastify = FastifyMain({logger})
 
+
+
+//  initializing database
+
+main()
 
 
 

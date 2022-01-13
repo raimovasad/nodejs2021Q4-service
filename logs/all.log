@@ -1,15 +1,51 @@
-{"level":30,"time":1641681729893,"pid":83431,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://127.0.0.1:4000"}
-{"level":30,"time":1641681749728,"pid":83431,"hostname":"asadbek-MS-7B86","reqId":"req-1","req":{"method":"GET","url":"/","hostname":"127.0.0.1:4000","remoteAddress":"127.0.0.1","remotePort":53740},"msg":"incoming request"}
-{"level":30,"time":1641681749729,"pid":83431,"hostname":"asadbek-MS-7B86","req_url":"/","query_params":{}}
-{"level":30,"time":1641681749734,"pid":83431,"hostname":"asadbek-MS-7B86","reqId":"req-1","res":{"statusCode":200},"responseTime":5.313721001148224,"msg":"request completed"}
-{"level":30,"time":1641685845631,"pid":99292,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
-{"level":30,"time":1641685856324,"pid":99292,"hostname":"asadbek-MS-7B86","reqId":"req-1","req":{"method":"GET","url":"/","hostname":"localhost:4000","remoteAddress":"127.0.0.1","remotePort":60752},"msg":"incoming request"}
-{"level":30,"time":1641685856325,"pid":99292,"hostname":"asadbek-MS-7B86","req_url":"/","query_params":{}}
-{"level":30,"time":1641685856330,"pid":99292,"hostname":"asadbek-MS-7B86","reqId":"req-1","res":{"statusCode":200},"responseTime":4.851315997540951,"msg":"request completed"}
-{"level":30,"time":1641688546100,"pid":108868,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
-{"level":30,"time":1641688592365,"pid":109090,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
-{"level":30,"time":1641688788583,"pid":110785,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
-{"level":30,"time":1641688871519,"pid":111568,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
-{"level":30,"time":1641688883863,"pid":111771,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
-{"level":30,"time":1641688890344,"pid":111838,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
-{"level":30,"time":1641688908145,"pid":112005,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
+{"level":30,"time":1642050066694,"pid":51001,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
+{"level":30,"time":1642050522801,"pid":53147,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
+{"level":30,"time":1642050605522,"pid":53147,"hostname":"asadbek-MS-7B86","reqId":"req-1","req":{"method":"GET","url":"/","hostname":"localhost:4000","remoteAddress":"127.0.0.1","remotePort":48164},"msg":"incoming request"}
+{"level":30,"time":1642050605523,"pid":53147,"hostname":"asadbek-MS-7B86","req_url":"/","query_params":{}}
+{"level":30,"time":1642050605527,"pid":53147,"hostname":"asadbek-MS-7B86","reqId":"req-1","res":{"statusCode":200},"responseTime":4.005040001124144,"msg":"request completed"}
+{"level":30,"time":1642050644043,"pid":53715,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
+{"level":30,"time":1642050648978,"pid":53777,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
+{"level":30,"time":1642050658665,"pid":53859,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
+{"level":30,"time":1642050848032,"pid":54606,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
+{"level":60,"time":1642050848042,"pid":54606,"hostname":"asadbek-MS-7B86","msg":"Cannot read properties of undefined (reading 'info')"}
+{"level":30,"time":1642050967751,"pid":55093,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
+{"level":30,"time":1642050967761,"pid":55093,"hostname":"asadbek-MS-7B86","msg":"Connected to postgres!"}
+{"level":30,"time":1642051022243,"pid":55408,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
+{"level":30,"time":1642051022254,"pid":55408,"hostname":"asadbek-MS-7B86","msg":"Connected to postgres!"}
+{"level":30,"time":1642051529325,"pid":57261,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
+{"level":60,"time":1642051529330,"pid":57261,"hostname":"asadbek-MS-7B86","msg":"пользователь \"admn\" не прошёл проверку подлинности (по паролю)"}
+{"level":30,"time":1642051541736,"pid":57375,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
+{"level":30,"time":1642051541745,"pid":57375,"hostname":"asadbek-MS-7B86","msg":"Connected to postgres!"}
+{"level":30,"time":1642051688519,"pid":58199,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
+{"level":30,"time":1642051688529,"pid":58199,"hostname":"asadbek-MS-7B86","msg":"Connected to postgres!"}
+{"level":30,"time":1642051699187,"pid":58388,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
+{"level":60,"time":1642051699193,"pid":58388,"hostname":"asadbek-MS-7B86","msg":"пользователь \"admin\" не прошёл проверку подлинности (по паролю)"}
+{"level":30,"time":1642051708237,"pid":58466,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
+{"level":60,"time":1642051708243,"pid":58466,"hostname":"asadbek-MS-7B86","msg":"пользователь \"admin\" не прошёл проверку подлинности (по паролю)"}
+{"level":30,"time":1642051723168,"pid":58602,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
+{"level":60,"time":1642051723173,"pid":58602,"hostname":"asadbek-MS-7B86","msg":"пользователь \"admin\" не прошёл проверку подлинности (по паролю)"}
+{"level":30,"time":1642051746420,"pid":58732,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
+{"level":60,"time":1642051746425,"pid":58732,"hostname":"asadbek-MS-7B86","msg":"пользователь \"admin\" не прошёл проверку подлинности (по паролю)"}
+{"level":30,"time":1642051770536,"pid":58807,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
+{"level":60,"time":1642051770544,"pid":58807,"hostname":"asadbek-MS-7B86","msg":"пользователь \"admin\" не прошёл проверку подлинности (по паролю)"}
+{"level":30,"time":1642051800167,"pid":59068,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
+{"level":60,"time":1642051800172,"pid":59068,"hostname":"asadbek-MS-7B86","msg":"пользователь \"admin\" не прошёл проверку подлинности (по паролю)"}
+{"level":30,"time":1642051815519,"pid":59225,"hostname":"asadbek-MS-7B86","msg":"admin"}
+{"level":30,"time":1642051815736,"pid":59225,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
+{"level":60,"time":1642051815741,"pid":59225,"hostname":"asadbek-MS-7B86","msg":"пользователь \"admin\" не прошёл проверку подлинности (по паролю)"}
+{"level":30,"time":1642051893395,"pid":59712,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
+{"level":30,"time":1642051893403,"pid":59712,"hostname":"asadbek-MS-7B86","msg":"Connected to postgres!"}
+{"level":30,"time":1642051908172,"pid":59854,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
+{"level":30,"time":1642051908181,"pid":59854,"hostname":"asadbek-MS-7B86","msg":"Connected to postgres!"}
+{"level":30,"time":1642051954876,"pid":60023,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
+{"level":30,"time":1642051954889,"pid":60023,"hostname":"asadbek-MS-7B86","msg":"Connected to postgres!"}
+{"level":30,"time":1642051968711,"pid":60186,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
+{"level":60,"time":1642051968716,"pid":60186,"hostname":"asadbek-MS-7B86","msg":"пользователь \"admin\" не прошёл проверку подлинности (по паролю)"}
+{"level":30,"time":1642051995402,"pid":60361,"hostname":"asadbek-MS-7B86","msg":"admin"}
+{"level":30,"time":1642051995658,"pid":60361,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
+{"level":60,"time":1642051995663,"pid":60361,"hostname":"asadbek-MS-7B86","msg":"пользователь \"admin\" не прошёл проверку подлинности (по паролю)"}
+{"level":30,"time":1642052027660,"pid":60458,"hostname":"asadbek-MS-7B86","msg":"12345"}
+{"level":30,"time":1642052027918,"pid":60458,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
+{"level":30,"time":1642052027930,"pid":60458,"hostname":"asadbek-MS-7B86","msg":"Connected to postgres!"}
+{"level":30,"time":1642052035473,"pid":60558,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
+{"level":30,"time":1642052035491,"pid":60558,"hostname":"asadbek-MS-7B86","msg":"Connected to postgres!"}

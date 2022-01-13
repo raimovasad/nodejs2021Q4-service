@@ -9,7 +9,7 @@
   "description": "REST service starter for RS School",
   "main": "dist/server.js",
   "scripts": {
-    "start": "nodemon src/server.ts",
+    "start": "nodemon src/server.ts --watch",
     "lint": "eslint --ext .js,.ts --fix src/",
     "test": "cross-env DEBUG=rs:* jest --testMatch \"<rootDir>/test/e2e/test/*.test.js\" --noStackTrace --runInBand",
     "test:auth": "cross-env DEBUG=rs:* TEST_MODE=auth jest --noStackTrace"
@@ -33,7 +33,6 @@
       "./test/setup.js"
     ]
   },
-  
   "lint-staged": {
     "src/**/*.js": [
       "npm run lint"
@@ -48,9 +47,11 @@
     "fastify-plugin": "^3.0.0",
     "fastify-sensible": "^3.1.2",
     "http-errors": "^2.0.0",
+    "pg": "^8.7.1",
     "pino": "^7.6.0",
     "pino-pretty": "^7.3.0",
     "ts-node": "^10.4.0",
+    "typeorm": "^0.2.41",
     "uuid": "8.3.2"
   },
   "devDependencies": {
