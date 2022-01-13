@@ -23,7 +23,7 @@ public name: string;
 
 public login: string;
 
-public password: string;
+price password: string;
 
 
   constructor({

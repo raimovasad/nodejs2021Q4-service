@@ -11,7 +11,9 @@ const main = async()=>{
         port:5432,
         username:config.POSTGRES_USER,
         password:config.POSTGRES_PASSWORD,
-        database: config.POSTGRES_DB
+        database: config.POSTGRES_DB,
+        entities:[],
+        synchronize: true
     });
     logger.info('Connected to postgres!')
     
