@@ -49,3 +49,10 @@
 {"level":30,"time":1642052027930,"pid":60458,"hostname":"asadbek-MS-7B86","msg":"Connected to postgres!"}
 {"level":30,"time":1642052035473,"pid":60558,"hostname":"asadbek-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
 {"level":30,"time":1642052035491,"pid":60558,"hostname":"asadbek-MS-7B86","msg":"Connected to postgres!"}
+{"level":30,"time":1642068935880,"pid":69702,"hostname":"alasad-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
+{"level":60,"time":1642068935886,"pid":69702,"hostname":"alasad-MS-7B86","msg":"password authentication failed for user \"admin\""}
+{"level":30,"time":1642077103466,"pid":74435,"hostname":"alasad-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
+{"level":30,"time":1642077103547,"pid":74435,"hostname":"alasad-MS-7B86","msg":"Connected to postgres!"}
+{"level":30,"time":1642126859585,"pid":208477,"hostname":"alasad-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
+{"level":30,"time":1642126859587,"pid":208477,"hostname":"alasad-MS-7B86","err":{"type":"Error","message":"getaddrinfo EAI_AGAIN postgres","stack":"Error: getaddrinfo EAI_AGAIN postgres\n    at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:71:26)","errno":-3001,"code":"EAI_AGAIN","syscall":"getaddrinfo","hostname":"postgres"},"msg":"getaddrinfo EAI_AGAIN postgres"}
+{"level":30,"time":1642127530874,"pid":211548,"hostname":"alasad-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}

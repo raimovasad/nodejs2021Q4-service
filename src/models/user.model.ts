@@ -23,7 +23,7 @@ public name: string;
 
 public login: string;
 
-price password: string;
+public password: string;
 
 
   constructor({
@@ -70,7 +70,7 @@ price password: string;
     users.push(this.toSaveUser())
     return this.toSaveUser();
   } 
-
+ 
    /**
    * Updates the user by in database.
    *

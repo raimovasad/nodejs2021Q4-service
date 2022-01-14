@@ -22,7 +22,7 @@ const {logger} = LOG
 
 const fastify = FastifyMain({logger})
 
-
+ 
 
 //  initializing database
 

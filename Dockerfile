@@ -6,7 +6,9 @@ EXPOSE ${PORT}
 
 WORKDIR /app/src
 
-COPY package.json package-lock.json ./
+COPY package.json package-lock.json /app/
+
+COPY tsconfig.json /app/
 
 RUN npm install --no-optional 
 

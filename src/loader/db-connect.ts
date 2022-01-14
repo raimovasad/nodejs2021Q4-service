@@ -5,17 +5,24 @@ import config from "../common/config";
 const {logger} = Pino
 
 const main = async()=>{
-    await createConnection({
-        type:"postgres",
-        host:"localhost",
-        port:5432,
-        username:config.POSTGRES_USER,
-        password:config.POSTGRES_PASSWORD,
-        database: config.POSTGRES_DB,
-        entities:[],
-        synchronize: true
-    });
-    logger.info('Connected to postgres!')
+    try{
+        await createConnection({
+            type:"postgres",
+            database: config.POSTGRES_DB,
+            username:config.POSTGRES_USER,
+            password:config.POSTGRES_PASSWORD,
+            logging: true,
+            synchronize: true,
+            host:"postgres",
+            port:5433,
+        });
+        logger.info('Connected to postgres!')
+    }
+    catch(err){
+        if(err instanceof Error){
+            throw new Error(err.message);
+        }
+    }
     
 }
 

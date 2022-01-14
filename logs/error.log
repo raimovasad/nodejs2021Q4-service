@@ -9,3 +9,5 @@
 {"level":60,"time":1642051815741,"pid":59225,"hostname":"asadbek-MS-7B86","msg":"пользователь \"admin\" не прошёл проверку подлинности (по паролю)"}
 {"level":60,"time":1642051968716,"pid":60186,"hostname":"asadbek-MS-7B86","msg":"пользователь \"admin\" не прошёл проверку подлинности (по паролю)"}
 {"level":60,"time":1642051995663,"pid":60361,"hostname":"asadbek-MS-7B86","msg":"пользователь \"admin\" не прошёл проверку подлинности (по паролю)"}
+{"level":60,"time":1642068935886,"pid":69702,"hostname":"alasad-MS-7B86","msg":"password authentication failed for user \"admin\""}
+{"level":60,"time":1642127530876,"pid":211548,"hostname":"alasad-MS-7B86","msg":"getaddrinfo EAI_AGAIN postgres"}
