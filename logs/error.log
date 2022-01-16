@@ -1,0 +1,13 @@
+{"level":60,"time":1642050848042,"pid":54606,"hostname":"asadbek-MS-7B86","msg":"Cannot read properties of undefined (reading 'info')"}
+{"level":60,"time":1642051529330,"pid":57261,"hostname":"asadbek-MS-7B86","msg":"пользователь \"admn\" не прошёл проверку подлинности (по паролю)"}
+{"level":60,"time":1642051699193,"pid":58388,"hostname":"asadbek-MS-7B86","msg":"пользователь \"admin\" не прошёл проверку подлинности (по паролю)"}
+{"level":60,"time":1642051708243,"pid":58466,"hostname":"asadbek-MS-7B86","msg":"пользователь \"admin\" не прошёл проверку подлинности (по паролю)"}
+{"level":60,"time":1642051723173,"pid":58602,"hostname":"asadbek-MS-7B86","msg":"пользователь \"admin\" не прошёл проверку подлинности (по паролю)"}
+{"level":60,"time":1642051746425,"pid":58732,"hostname":"asadbek-MS-7B86","msg":"пользователь \"admin\" не прошёл проверку подлинности (по паролю)"}
+{"level":60,"time":1642051770544,"pid":58807,"hostname":"asadbek-MS-7B86","msg":"пользователь \"admin\" не прошёл проверку подлинности (по паролю)"}
+{"level":60,"time":1642051800172,"pid":59068,"hostname":"asadbek-MS-7B86","msg":"пользователь \"admin\" не прошёл проверку подлинности (по паролю)"}
+{"level":60,"time":1642051815741,"pid":59225,"hostname":"asadbek-MS-7B86","msg":"пользователь \"admin\" не прошёл проверку подлинности (по паролю)"}
+{"level":60,"time":1642051968716,"pid":60186,"hostname":"asadbek-MS-7B86","msg":"пользователь \"admin\" не прошёл проверку подлинности (по паролю)"}
+{"level":60,"time":1642051995663,"pid":60361,"hostname":"asadbek-MS-7B86","msg":"пользователь \"admin\" не прошёл проверку подлинности (по паролю)"}
+{"level":60,"time":1642068935886,"pid":69702,"hostname":"alasad-MS-7B86","msg":"password authentication failed for user \"admin\""}
+{"level":60,"time":1642127530876,"pid":211548,"hostname":"alasad-MS-7B86","msg":"getaddrinfo EAI_AGAIN postgres"}

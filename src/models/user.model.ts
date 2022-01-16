@@ -1,0 +1,183 @@
+import { v4 as uuid } from 'uuid';
+// import createHttpError from 'http-errors';
+import {Entity,BaseEntity,Column,PrimaryColumn} from 'typeorm';
+
+
+
+
+
+
+
+// interface IUser {
+//   id: string;
+//   name: string;
+//   login: string;
+//   password: string;
+// }
+
+// type IUserNoId = Omit<IUser,'id'>
+
+
+//  const users: IUser[] = []
+
+@Entity('user')
+
+export class User extends BaseEntity {
+
+  constructor({
+    id = uuid(),
+    name = 'USER',
+    login = 'user',
+    password = 'P@55w0rd'
+  } = {}) {
+    super()
+    this.id = id;
+    this.name = name;
+    this.login = login;
+    this.password = password;
+  }
+
+  @PrimaryColumn({
+    type:"uuid"
+  })
+  id:string
+
+  @Column()
+  name: string
+
+  @Column()
+  login: string
+
+  @Column({
+    select: false
+  })
+  password: string
+
+
+
+
+
+  // /**
+  //  * Returns the user params as an object.
+  //  *
+  //  *
+  //  * @returns The user object that is going to be saved
+  //  */
+
+  // toSaveUser():IUser{
+  //   return {
+  //     id: this.id,
+  //     name: this.name,
+  //     login: this.login,
+  //     password: this.password
+  //   }
+  // }
+
+  // /**
+  //  * Saves a new user in database.
+  //  *
+  //  *  
+  //  * @returns The new user object that is saved
+  //  * @throws An Error if there is no access to the database
+  //  */
+
+  // save(){
+  //   const usersDB = users || undefined
+  //   if(!usersDB){
+  //     throw new createHttpError.InternalServerError('Cannot access to database!')
+  //   }
+  //   users.push(this.toSaveUser())
+  //   return this.toSaveUser();
+  // } 
+ 
+  //  /**
+  //  * Updates the user by in database.
+  //  *
+  //  *
+  //  * @param id - The id of the user  
+  //  * @param user - The object of the user  
+  //  * @returns The new user object that is saved
+  //  * @throws Error id the user with that id doesn't exist or there is no access to database
+  //  */
+
+  // static update(id: string,user: IUserNoId){
+  //   const usersDB = users || undefined
+  //   if(!usersDB){
+  //     throw new createHttpError.InternalServerError('Cannot access to database!')
+  //   }
+  //   const index = users.findIndex( (c: IUser)=> c.id === id)
+  //   if(index === -1){
+  //     throw new createHttpError.NotFound(`User with id ${id} doesn't exist!`)
+  //   }
+  //   users[index] = {
+  //     id,
+  //     ...user
+  //   }
+  //   return this.toResponse(users[index]);
+  // }
+ 
+  //  /**
+  //  * Returns the user without password.
+  //  *
+  //  *
+  //  * @param user - The object of the user  
+  //  * @returns The user object without password 
+  //  */
+
+  // static toResponse(user:IUser) {
+  //   const { id, name, login } = user;
+  //   return { id, name, login };
+  // }
+
+  //  /**
+  //  * Returns all users in database.
+  //  *
+  //  *
+  //  * @returns All users in database
+  //  */
+
+  // static getAll(){
+  //   return users
+  // }
+
+  //  /**
+  //  * Returns the user by id.
+  //  *
+  //  *
+  //  * @param id - The id of the user  
+  //  * @returns The user object
+  //  * @throws Error if the user with that id doesn't exist
+  //  */
+
+  // static getById(id: string){
+  //   const usersDB = users
+  //   const user = usersDB.find(c => c.id.toString() === id.toString())
+  //   if(!user){
+  //     throw new createHttpError.NotFound(`User with id ${id} doesn't exist!`)
+  //   }else{
+  //     return user;
+  //   }
+  // }
+
+  //  /**
+  //  * Removes the user by id.
+  //  *
+  //  *
+  //  * @param id - The id of the user  
+  //  * @throws Error if the user with that id doesn't exist
+  //  */
+
+  // static remove(id: string){
+  //   const index = users.findIndex( c=> c.id === id)
+  //   if(index === -1){
+  //     throw new createHttpError.NotFound(`User with id ${id} doesn't exist!`)
+  //   }
+  //   else{
+  //    users.splice(index,1)
+  //   }
+
+  // }
+
+  
+}
+
