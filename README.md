@@ -1,4 +1,4 @@
-# Docker basics
+# Typeorm-Postgresql
 
 ## Prerequisites
 
@@ -6,22 +6,24 @@
 - Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager.
 - Docker - [Download & Install docker](https://docs.docker.com/get-docker/).
 - Docker compose - [Download & Install docker-compose](https://docs.docker.com/compose/install/).
+- Typeorm - [Download & Install Typeorm](https://www.npmjs.com/package/typeorm/).
 
 
 
-### To start clone this repository  ```git clone {repository URL}``` and switch to the branch ```task-7-docker-basics```
+### To start clone this repository  ```git clone {repository URL}``` and switch to the branch ```task-8-typeorm-postgresql```
 
  1. With docker:
   
-  *(PORT: 4000 by default DB_PORT: 3200 by default)*
+  *(PORT: 4000 by default)*
 
   **Type these commands in your vscode console**
     
    - Building and starting app with  ```docker-compose up --build```
    - To see all images  ```docker images -a```
-   - To see all running or stopped images  ```docker ps```
+   - To see all running  ```docker ps```
    - For checking test  ```docker container exec unique-http npm run test``` (in a new console)
    - For checking lint  ```docker container exec unique-http npm run lint``` (in a new console)
+   - For running migration  ```docker container exec unique-http npm run migration:run``` (in a new console)
    - Closing app and with cleaning  ```docker-compose down --volume```
 
  2.Local (without docker):
