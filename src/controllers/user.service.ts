@@ -1,7 +1,7 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
-import User from '../models/user.model';
-import Task from '../models/task.model';
+import {User} from '../models/user.model';
 
+// import {Task} from '../models/task.model';
 
 
 type getUserByIdReq = FastifyRequest<{
@@ -17,12 +17,12 @@ type addUserReq = FastifyRequest<{
 Body:{name: string, login: string, password: string}
 }>
 
-interface Iuser {
-    id: string,
-    name: string,
-    login: string,
-    password: string
-}
+// interface Iuser {
+//     id: string,
+//     name: string,
+//     login: string,
+//     password: string
+// }
 
 
 /**
@@ -34,9 +34,10 @@ interface Iuser {
  */
 
 async function getAllUsers(req: FastifyRequest,res: FastifyReply): Promise<void>{
-    const users: Array<Iuser> = User.getAll()
 
-    res.send(users.map(user => User.toResponse(user)))
+    const users = await User.find()
+
+    res.send(users)
 };
 
 /**
@@ -46,11 +47,11 @@ async function getAllUsers(req: FastifyRequest,res: FastifyReply): Promise<void>
  * @param req - fastify request
  * @param res - fastify reply
  */
-
+ 
 async function getUsersById(req: getUserByIdReq,res: FastifyReply): Promise<void>{
     const {id} = req.params;
-    const user = User.getById(id);
-    res.send(User.toResponse(user));
+    const user = User.findOne({id});
+    res.send(user);
 };
 
 /**
@@ -69,7 +70,7 @@ async function updateUser(req: updateUserReq,res: FastifyReply): Promise<void>{
         login,
         password
     }
-    const updated = User.update(id,user)
+    const updated = User.update({id},user)
     res.send(updated);
 };
 
@@ -90,7 +91,7 @@ async function addUser(req: addUserReq ,res: FastifyReply): Promise<void> {
         const user = new User({name,login,password})
             const newUser = user.save()
             res.statusCode =201;
-            res.send(User.toResponse(newUser))
+            res.send(newUser)
         
     }
  }
@@ -106,10 +107,18 @@ async function addUser(req: addUserReq ,res: FastifyReply): Promise<void> {
 
  async function removeUser(req: getUserByIdReq,res: FastifyReply): Promise<void> { 
     const {id} = req.params;
-        User.remove(id);
-        Task.removeUserId(id);
+    const user  = await User.findOne({id})
+    if(user){
+        await User.remove(user);
         res.statusCode = 204;
         res.send();
+    }
+    else{
+        res.statusCode = 404;
+        res.send();
+    }
+    // Task.removeUserId(id);
+        
     
   }
 

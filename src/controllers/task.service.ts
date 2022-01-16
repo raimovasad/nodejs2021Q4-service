@@ -1,6 +1,6 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 import {validate} from 'uuid';
-import TaskMain from '../models/task.model';
+import {Task} from '../models/task.model';
 
 
 type getAllReq = FastifyRequest<{
@@ -50,7 +50,7 @@ async function getAllTasks(req: getAllReq,res: FastifyReply){
     const {boardId} = req.params;
     const validId = validate(boardId);
     if(validId){
-        const tasks = TaskMain.getAll();
+        const tasks = Task.find();
         res.send(tasks);
     }
     else{
@@ -74,7 +74,7 @@ async function getTaskById(req:getByIdReq,res: FastifyReply): Promise<void>{
     // const validId = uuidTask.validate(boardId);
     // const validTaskId = uuidTask.validate(id);
     // if(validId && validTaskId){
-        const task = TaskMain.getById(id);
+        const task = Task.findOne({id});
         res.send(task);
        
     // }
@@ -114,7 +114,7 @@ async function updateTask(req: updateTaskReq,res: FastifyReply){
             boardId,
             columnId,
          };
-        const updated = TaskMain.update(id,task)
+        const updated = Task.update(id,task)
         res.send(updated);
         
     // }
@@ -143,7 +143,7 @@ async function addTask(req: addReq,res: FastifyReply) {
         const {boardId:boardIdReq} = req.params
         const {title,order,description,userId,columnId} = req.body
         
-            const task = new TaskMain({
+            const task = new Task({
                 title,
                 order,
                 description,
@@ -178,14 +178,18 @@ async function removeTask(req:getByIdReq,res: FastifyReply) {
         //     res.statusCode = 404
         //      res.send('Invalid boardId!')
         // }else{
-                const task = TaskMain.getById(id)
+                const task = await Task.findOne({id})
                 if(!task){
                     res.statusCode = 404
                     res.send('No such task!')
                 }
-                TaskMain.remove(id)
-                res.statusCode =204
-                res.send()
+                else
+                {
+                    await Task.remove(task)
+                    res.statusCode =204
+                    res.send()
+                }
+               
             
         // }
         

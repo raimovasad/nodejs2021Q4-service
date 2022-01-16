@@ -56,3 +56,6 @@
 {"level":30,"time":1642126859585,"pid":208477,"hostname":"alasad-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
 {"level":30,"time":1642126859587,"pid":208477,"hostname":"alasad-MS-7B86","err":{"type":"Error","message":"getaddrinfo EAI_AGAIN postgres","stack":"Error: getaddrinfo EAI_AGAIN postgres\n    at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:71:26)","errno":-3001,"code":"EAI_AGAIN","syscall":"getaddrinfo","hostname":"postgres"},"msg":"getaddrinfo EAI_AGAIN postgres"}
 {"level":30,"time":1642127530874,"pid":211548,"hostname":"alasad-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
+{"level":30,"time":1642358956155,"pid":65239,"hostname":"alasad-MS-7B86","msg":"Starting connecting"}
+{"level":30,"time":1642358956226,"pid":65239,"hostname":"alasad-MS-7B86","msg":"Server listening at http://0.0.0.0:4000"}
+{"level":30,"time":1642358956227,"pid":65239,"hostname":"alasad-MS-7B86","err":{"type":"Error","message":"getaddrinfo EAI_AGAIN postgres_db","stack":"Error: getaddrinfo EAI_AGAIN postgres_db\n    at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:71:26)","errno":-3001,"code":"EAI_AGAIN","syscall":"getaddrinfo","hostname":"postgres_db"},"msg":"getaddrinfo EAI_AGAIN postgres_db"}

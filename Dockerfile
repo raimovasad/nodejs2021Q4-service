@@ -8,7 +8,7 @@ WORKDIR /app/src
 
 COPY package.json package-lock.json /app/
 
-COPY tsconfig.json /app/
+COPY tsconfig.json ormconfig.json /app/
 
 RUN npm install --no-optional 
 

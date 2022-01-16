@@ -1,7 +1,7 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 
-import BoardModel from '../models/board.model';
-import TaskModel from '../models/task.model';
+import {Board} from '../models/board.model';
+// import {Task} from '../models/task.model';
 
 
 type CustomUpdateReq = FastifyRequest<{
@@ -9,7 +9,7 @@ type CustomUpdateReq = FastifyRequest<{
     Body:{title: string, columns: Array<{id: string, title: string, order: number}>}
 }>
 
-interface Board{
+interface IBoard{
     id?: string;
     title: string;
     columns: Array<{id: string, title: string, order: number}> 
@@ -34,7 +34,7 @@ type CustomGetByIdReq = FastifyRequest<{
  */
 
 async function getAllBoards(req: FastifyRequest,res: FastifyReply): Promise<void>{
-    const boards = BoardModel.getAll()
+    const boards = await Board.find()
     res.send(boards)
 };
 
@@ -50,7 +50,7 @@ async function getAllBoards(req: FastifyRequest,res: FastifyReply): Promise<void
 async function getBoardById(req: CustomGetByIdReq,res: FastifyReply): Promise<void>{
     const {id} = req.params;
     // try{
-    const board = BoardModel.getById(id);
+    const board = Board.findOne(id);
     res.send(board);
     // }catch(e){
     //    if(e instanceof Error){
@@ -75,12 +75,12 @@ async function getBoardById(req: CustomGetByIdReq,res: FastifyReply): Promise<vo
 async function updateBoard(req: CustomUpdateReq,res: FastifyReply): Promise<void>{
     const {id} = req.params;
     const {title,columns} = req.body;
-    const board:Board = {
+    const board:IBoard = {
         title,
         columns,
     }
 
-    const updated = BoardModel.update(id, board)
+    const updated = Board.update(id, board)
     res.send(updated);
 };
 
@@ -98,7 +98,7 @@ async function addBoard(req: CustomAddReq,res: FastifyReply): Promise<void> {
         res.send({message:'Not entered the required field!'});
     }
     else{
-        const board = new BoardModel({title,columns})
+        const board = new Board({title,columns})
            const newBoard = board.save()
            res.statusCode = 201
            res.send(newBoard)
@@ -115,8 +115,8 @@ async function addBoard(req: CustomAddReq,res: FastifyReply): Promise<void> {
 
 async function removeBoard(req: CustomGetByIdReq,res: FastifyReply): Promise<void> { 
     const {id} = req.params;
-        BoardModel.remove(id)
-         TaskModel.removeByBoard(id)
+        Board.delete(id)
+        //  Task.removeByBoard(id)
 
         res.statusCode =204
         res.send()

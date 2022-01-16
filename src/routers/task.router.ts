@@ -21,3 +21,4 @@ async function taskRoutes(fastify: FastifyInstance) {
 
 
 export default fp(taskRoutes);
+ 

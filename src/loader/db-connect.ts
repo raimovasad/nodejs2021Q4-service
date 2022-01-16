@@ -1,26 +1,36 @@
-import {createConnection} from "typeorm";
+import { createConnection,  } from 'typeorm';
 import Pino from "../tools/logger";
 import config from "../common/config";
+import  {User} from "../models/user.model";
+import  {Task} from "../models/task.model";
+import  {Board} from "../models/board.model";
 
 const {logger} = Pino
 
+
+
+
+
+
 const main = async()=>{
     try{
-        await createConnection({
+        logger.info('Starting connecting');
+    const connection =    await createConnection({
             type:"postgres",
-            database: config.POSTGRES_DB,
+            host:"postgres_db",
+            port:5432,
             username:config.POSTGRES_USER,
             password:config.POSTGRES_PASSWORD,
-            logging: true,
-            synchronize: true,
-            host:"postgres",
-            port:5433,
+            database: config.POSTGRES_DB,
+            entities:[User,Task,Board],
+            synchronize:true
         });
-        logger.info('Connected to postgres!')
+        logger.info('Connected to postgres!',connection)
+        connection.runMigrations()
     }
-    catch(err){
-        if(err instanceof Error){
-            throw new Error(err.message);
+    catch(err){ 
+        if(err ){
+            logger.info(err);
         }
     }
     
